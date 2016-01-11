@@ -26,4 +26,19 @@
                  :_version 1
                  :status 200}))))
 
-
+(deftest ^{:rest true} test-ok?
+  (is (resp/ok?
+        {:_id "id"
+         :_index "idx"
+         :_type "type"
+         :_version 1
+         :created true}))
+  (is (resp/ok?
+        {:_id "id"
+         :_index "idx"
+         :_type "type"
+         :_version 2
+         :created false}))
+  (is (false? (resp/ok?
+                {:error "MapperParsingException[failed to parse [example_attribute]]; nested: NumberFormatException[For input string: \"example value\"];"
+                 :status 400}))))

@@ -26,7 +26,9 @@
 
 (defn ok?
   [m]
-  (created? m))
+  (or (created? m)
+      (let [s (:status m)]
+        (and s (statuses/success? s)))))
 
 (defn conflict?
   [m]
