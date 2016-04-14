@@ -44,8 +44,10 @@
 
   (deftest ^{:native true} test-count-with-mixed-mappings
     (let [index-name "people"
-          index-type "person"]
-      (idx/create conn index-name :mappings fx/people-mapping)
+          index-type "person"
+          person-properties (:person fx/people-mapping)]
+      (idx/create conn index-name :mappings {:person person-properties
+                                             :altperson person-properties})
       (doc/create conn index-name index-type fx/person-jack)
       (doc/create conn index-name index-type fx/person-joe)
       (doc/create conn index-name "altperson" fx/person-jack)
