@@ -107,16 +107,16 @@
   ([^Connection conn index mapping-type id script]
      (rest/post conn (rest/record-update-url conn
                                              index mapping-type id)
-                {:body {:script script}}))
+                {:body {:script {:inline script}}}))
   ([^Connection conn index mapping-type id script params]
      (rest/post conn (rest/record-update-url conn
                                              index mapping-type id)
-                {:body {:script script :params params}}))
+                {:body {:script {:inline script :params params}}}))
   ([^Connection conn index mapping-type id script params & args]
      (rest/post conn (rest/record-update-url conn
                                              index mapping-type id)
                 (let [optional-params (ar/->opts args)]
-                  {:body (merge {:script script :params params} optional-params)}))))
+                  {:body {:script (merge {:inline script :params params} optional-params)}}))))
 
 
 (defn get
