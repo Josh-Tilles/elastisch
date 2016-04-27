@@ -24,7 +24,7 @@
 (defn term
   "Term Query
 
-  For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-term-query.html"
+  For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-term-query.html"
   [key values & args]
   (merge { (if (coll? values) :terms :term) (hash-map key values) }
          (ar/->opts args)))
@@ -32,28 +32,28 @@
 (defn terms
   "Terms Query
 
-  For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html"
+  For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-terms-query.html"
   [key values & args]
   (apply term key values args))
 
 (defn range
   "Range Query
 
-  For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-range-query.html"
+  For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-range-query.html"
   [key & args]
   {:range (hash-map key (ar/->opts args)) })
 
 (defn match
   "Match Query, before 0.19.9 known as Text Query.
 
-  For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-match-query.html"
+  For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-match-query.html"
   [field query & args]
   {:match {field (merge {:query query} (ar/->opts args))}})
 
 (defn bool
   "Boolean Query
 
-  For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html"
+  For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-bool-query.html"
   [& args]
   {:bool (ar/->opts args)})
 
@@ -61,49 +61,49 @@
 (defn boosting
   "Boosting Query
 
-  For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html"
+  For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-boosting-query.html"
   [& args]
   {:boosting (ar/->opts args)})
 
 (defn ids
   "IDs Query
 
-  For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html"
+  For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-ids-query.html"
   [type ids]
   {:ids { :type type :values ids }})
 
 (defn constant-score
   "Constant Score Query
 
-  For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html"
+  For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-constant-score-query.html"
   [& args]
   {:constant_score (ar/->opts args)})
 
 (defn dis-max
   "Dis Max Query
 
-  For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html"
+  For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-dis-max-query.html"
   [& args]
   {:dis_max (ar/->opts args)})
 
 (defn prefix
   "Prefix query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-prefix-query.html"
   [& args]
   {:prefix (ar/->opts args)})
 
 (defn filtered
   "Filtered query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-filtered-query.html"
   [& args]
   {:filtered (ar/->opts args)})
 
 (defn fuzzy-like-this
   "FLT (fuzzy like this) query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-flt-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-flt-query.html"
   [& args]
   {:fuzzy_like_this (ar/->opts args)})
 
@@ -112,7 +112,7 @@
 (defn fuzzy-like-this-field
   "FLT (fuzzy like this) query for a single field
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-flt-field-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-flt-field-query.html"
   [& args]
   {:fuzzy_like_this_field (ar/->opts args)})
 
@@ -121,14 +121,14 @@
 (defn fuzzy
   "Fuzzy or Levenshtein (edit distance) query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-fuzzy-query.html"
   [& args]
   {:fuzzy (ar/->opts args)})
 
 (defn match-all
   "Match All query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-match-all-query.html"
   ([]
      {:match_all {}})
   ([& args]
@@ -137,7 +137,7 @@
 (defn more-like-this
   "MLT (More Like This) query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-mlt-query.html"
   [& args]
   {:more_like_this (ar/->opts args)})
 
