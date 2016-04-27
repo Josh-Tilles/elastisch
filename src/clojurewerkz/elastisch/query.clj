@@ -230,14 +230,14 @@
 (defn top-children
   "Top children query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-top-children-query.html"
   [& args]
   {:top_children (ar/->opts args)})
 
 (defn nested
   "Nested document query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-nested-query.html"
   [& args]
   {:nested (ar/->opts args)})
 
