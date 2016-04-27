@@ -146,7 +146,7 @@
 (defn more-like-this-field
   "MLT (More Like This) query that works for a single field
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-mlt-field-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-mlt-field-query.html"
   [& args]
   {:more_like_this_field (ar/->opts args)})
 
