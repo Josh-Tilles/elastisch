@@ -199,10 +199,6 @@
   [conn ^String index-name]
   (url-with-path conn index-name "_close"))
 
-(defn index-snapshot-url
-  [conn ^String index-name]
-  (url-with-path conn index-name "_gateway/snapshot"))
-
 (defn index-mget-url
   ([conn]
      (url-with-path conn "_mget"))
