@@ -155,7 +155,7 @@
 (defn query-string
   "Query String query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-query-string-query.html"
   [& args]
   (let [opts      (ar/->opts args)
         escape-fn (or (:escape-with opts) escape/escape-query-string-characters)
@@ -167,56 +167,56 @@
 (defn span-first
   "Span First query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-span-first-query.html"
   [& args]
   {:span_first (ar/->opts args)})
 
 (defn span-near
   "Span Near query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-near-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-span-near-query.html"
   [& args]
   {:span_near (ar/->opts args)})
 
 (defn span-not
   "Span Not query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-span-not-query.html"
   [& args]
   {:span_not (ar/->opts args)})
 
 (defn span-or
   "Span Or query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-span-or-query.html"
   [& args]
   {:span_or (ar/->opts args)})
 
 (defn span-term
   "Span Term query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-span-term-query.html"
   [& args]
   {:span_term (ar/->opts args)})
 
 (defn wildcard
   "Wildcard query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-wildcard-query.html"
   [& args]
   {:wildcard (ar/->opts args)})
 
 (defn indices
   "Indices query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-indices-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-indices-query.html"
   [& args]
   {:indices (ar/->opts args)})
 
 (defn has-child
   "Has Child query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/1.7/query-dsl-has-child-query.html"
   [& args]
   {:has_child (ar/->opts args)})
 
