@@ -193,13 +193,6 @@
   [& args]
   {:has_child (ar/->opts args)})
 
-(defn custom-filters-score
-  "Custom Filters Score query
-
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-custom-filters-score-query.html"
-  [& args]
-  {:custom_filters_score (ar/->opts args)})
-
 (defn top-children
   "Top children query
 
