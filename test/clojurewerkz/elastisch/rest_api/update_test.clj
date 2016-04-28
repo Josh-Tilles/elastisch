@@ -72,7 +72,7 @@
       (idx/refresh conn index-name)
 
       (let [original-document (doc/get conn index-name index-type id)]
-        ;; http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-update.html#upserts
+        ;; https://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-update.html#upserts
         (doc/upsert conn index-name index-type id {:country "India"})
         (idx/refresh conn index-name)
         ;; Now should have merged document data
@@ -89,7 +89,7 @@
       (idx/create conn index-name :mappings fx/people-mapping)
 
       (idx/refresh conn index-name)
-      ;; http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-update.html#upserts
+      ;; https://www.elastic.co/guide/en/elasticsearch/reference/2.3/docs-update.html#upserts
       (doc/upsert conn index-name index-type id person)
       (idx/refresh conn index-name)
       ;; Now should have new document data
