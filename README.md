@@ -9,7 +9,7 @@ ElasticSearch](http://clojureelasticsearch.info), a modern distributed search en
  * Be reasonably feature complete
  * Be [well documented](http://clojureelasticsearch.info)
  * Be [well tested](https://github.com/clojurewerkz/elastisch/tree/master/test)
- * Closely follow [ElasticSearch API structure](http://www.elasticsearch.org/guide/reference/api/), no new abstractions introduced
+ * Closely follow [ElasticSearch API structure](https://www.elastic.co/guide/en/elasticsearch/reference/1.7/index.html), no new abstractions introduced
  * Support multiple transports: HTTP, native ES client, possibly more (e.g. Memcached)
  * Follow recent ElasticSearch releases & developments
 
