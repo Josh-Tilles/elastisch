@@ -109,7 +109,7 @@
 
       (let [original-document (doc/get conn index-name index-type id)]
         ;; Udpate with partial document. doc key is needed by update partial api of elastic search
-        ;; http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/partial-updates.html
+        ;; https://www.elastic.co/guide/en/elasticsearch/guide/2.x/partial-updates.html
         (doc/update-with-partial-doc conn index-name index-type id {:country "India"})
         (idx/refresh conn index-name)
         ;; Now should have merged document data
