@@ -1297,7 +1297,7 @@ We encourage all users to upgrade to 1.4, it is a drop-in replacement for the ma
 
 ### Match Query Support
 
-[ElasticSearch 0.19.9](http://www.elasticsearch.org/blog/2012/08/23/0.19.9-released.html) renames Text Query to Match Query. Elastisch adapts by introducing `clojurewerkz.elastisch.query/match` that
+[ElasticSearch 0.19.9](https://www.elastic.co/blog/0-19-9-released) renames Text Query to Match Query. Elastisch adapts by introducing `clojurewerkz.elastisch.query/match` that
 is effectively an alias for `clojurewerkz.elastisch.query/text` (ElasticSearch still supports `:text` in the query DSL for backwards
 compatibility).
 
