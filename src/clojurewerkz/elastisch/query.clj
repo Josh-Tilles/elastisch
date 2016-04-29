@@ -193,13 +193,6 @@
   [& args]
   {:has_child (ar/->opts args)})
 
-(defn top-children
-  "Top children query
-
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html"
-  [& args]
-  {:top_children (ar/->opts args)})
-
 (defn nested
   "Nested document query
 
