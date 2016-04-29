@@ -165,7 +165,7 @@
    0-arity updates *all* indexes and may be a very expensive operation. Use it carefully.
    1-arity refreshes a single index.
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-refresh.html"
   ([^Connection conn]
      (rest/post conn (rest/index-refresh-url conn)))
   ([^Connection conn index-name]
@@ -191,7 +191,7 @@
    :wait_for_merge : should the request wait for the merge to end?
 
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-optimize.html"
   ([^Connection conn]
      (rest/post conn (rest/index-optimize-url conn)))
   ([^Connection conn index-name & args]
@@ -213,7 +213,7 @@
 
    :refresh : should a refresh be performed after the flush?
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-flush.html"
   ([^Connection conn]
      (rest/post conn (rest/index-flush-url conn)))
   ([^Connection conn index-name]
@@ -236,7 +236,7 @@
    :field_data : should field data caches be cleared?
    :bloom : should Bloom filter caches be cleared?
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-clearcache.html"
   ([^Connection conn]
      (rest/post conn (rest/index-clear-cache-url conn)))
   ([^Connection conn index-name]
@@ -258,7 +258,7 @@
    { :remove { :index \"test1\" :alias \"alias1\" } }
 
    and so on, the same as described in the Elasticsearch documentation guide on aliases:
-   http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html"
+   https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-aliases.html"
   [^Connection conn & actions]
   (rest/post conn (rest/index-aliases-batch-url conn)
              {:body {:actions actions}}))
@@ -266,7 +266,7 @@
 (defn get-aliases
   "Fetches and returns aliases for an index or multiple indexes.
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-aliases.html"
   [^Connection conn index-name]
   (rest/get conn (rest/index-aliases-url conn
                                          (join-names index-name))))
@@ -285,7 +285,7 @@
    :mappings : the same as for index/create
    :aliases  : template aliases configuration
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-templates.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-templates.html"
   [^Connection conn ^String template-name & args]
   (let [opts                                 (ar/->opts args)
         {:keys [template settings mappings aliases]} opts]
@@ -338,7 +338,7 @@
 (defn segments
   "Returns segments information for an index or multiple indexes.
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-segments.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-segments.html"
   ([^Connection conn]
      (rest/get conn (rest/index-segments-url conn)))
   ([^Connection conn index-name]
@@ -359,7 +359,7 @@
   :completion_fields : fields to be included in the completion suggest statistics
   :fielddata_fields : fields to be included in the fielddata statistics
 
-  API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/1.5/indices-stats.html"
+  API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-stats.html"
   ([^Connection conn index-name & args]
    (let [opts (ar/->opts args)]
      (rest/get conn (rest/index-stats-url conn
