@@ -64,7 +64,7 @@
       (idx/create conn \"myapp_development\" :mappings mapping-types))
 
    Related Elasticsearch API Reference section:
-   http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index.html"
+   https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-create-index.html"
   [^Client conn ^String index-name & args]
   (let [opts                        (ar/->opts args)
         {:keys [settings mappings]} opts
@@ -103,7 +103,7 @@
 (defn get-mapping
   "The get mapping API allows to retrieve mapping definition of index or index/type.
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-get-mapping.html"
   ([^Client conn ^String index-name]
      (let [ft                       (es/admin-get-mappings conn (cnv/->get-mappings-request))
            ^GetMappingsResponse res (.actionGet ft)]

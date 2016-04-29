@@ -46,7 +46,7 @@
       (idx/create conn \"myapp_development\" :mappings mapping-types))
 
    Related Elasticsearch API Reference section:
-   http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index.html"
+   https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-create-index.html"
   [^Connection conn ^String index-name & args]
   (let [opts                        (ar/->opts args)
         {:keys [settings mappings]} opts]
@@ -59,7 +59,7 @@
 (defn exists?
   "Used to check if the index (indices) exists or not.
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-exists.html"
   [^Connection conn ^String index-name]
   (= 200 (:status (rest/head conn (rest/index-url conn
                                                   index-name)))))
@@ -67,7 +67,7 @@
 (defn type-exists?
   "Used to check if a type/types exists in an index/indices.
 
-   API Reference: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-types-exists.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-types-exists.html"
   [^Connection conn ^String index-name ^String type-name]
   (= 200 (:status (rest/head conn (rest/mapping-type-url conn
                                                          index-name type-name)))))
@@ -75,7 +75,7 @@
 (defn delete
   "Deletes an existing index.
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-delete-index.html"
   ([^Connection conn]
      (rest/delete conn (rest/index-url conn
                                        "_all")))
@@ -90,7 +90,7 @@
 (defn get-mapping
   "The get mapping API allows to retrieve mapping definition of index or index/type.
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-get-mapping.html"
   ([^Connection conn ^String index-name]
      (rest/get conn (rest/index-mapping-url conn
                                             (join-names index-name))))
@@ -102,7 +102,7 @@
 (defn update-mapping
   "The put mapping API allows to register or modify specific mapping definition for a specific type.
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-put-mapping.html"
   [^Connection conn ^String index-name-or-names ^String type-name & args]
   (let [{:keys [mapping] :as opts}  (ar/->opts args)]
     (rest/put conn
@@ -117,7 +117,7 @@
 (defn update-settings
   "Change specific index level settings in real time.
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html"
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-update-settings.html"
   ([^Connection conn settings]
      (rest/put conn (rest/index-settings-url conn) {:body settings}))
   ([^Connection conn ^String index-name settings]
@@ -128,7 +128,7 @@
 (defn get-settings
   "The get settings API allows to retrieve settings of an index or multiple indices
 
-   API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings.html
+   API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-get-settings.html
   "
   ([^Connection conn]
      (rest/get conn (rest/index-settings-url conn)))
@@ -142,7 +142,7 @@
 (defn open
   "Opens an index.
 
-  API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html"
+  API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-open-close.html"
   [^Connection conn index-name]
   (rest/post conn (rest/index-open-url conn
                                        index-name)))
@@ -150,7 +150,7 @@
 (defn close
   "Closes an index.
 
-  API Reference: http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html"
+  API Reference: https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-open-close.html"
   [^Connection conn index-name]
   (rest/post conn (rest/index-close-url conn
                                         index-name)))

@@ -196,7 +196,7 @@
 (defn nested
   "Nested document query
 
-   For more information, please refer to http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html"
+   For more information, please refer to https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl-nested-query.html"
   [& args]
   {:nested (ar/->opts args)})
 
