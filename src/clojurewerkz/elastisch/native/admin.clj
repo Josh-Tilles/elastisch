@@ -30,6 +30,7 @@
 
 (defn take-snapshot
   "Takes a snapshot"
+  {:doc/format :markdown}
   [^Client conn ^String repository ^String snapshot & args]
   (let [opts                         (ar/->opts args)
         ft                           (es/admin-create-snapshot conn (cnv/->create-snapshot-request repository snapshot opts))
@@ -39,6 +40,7 @@
 
 (defn delete-snapshot
   "Deletes a snapshot"
+  {:doc/format :markdown}
   [^Client conn ^String repository ^String snapshot]
   (let [ft                           (es/admin-delete-snapshot conn (cnv/->delete-snapshot-request repository snapshot))
         ^DeleteSnapshotResponse res (.actionGet ft)]
