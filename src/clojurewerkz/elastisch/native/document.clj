@@ -70,15 +70,15 @@
        (cnv/index-response->map (.actionGet res)))))
 
 
-   (defn create-search-template
-    "Adds a search template to the .scripts index the template should be
-     a map of the form:
-     {:template {:filter {:term {:name \"{{name}}\"}}}}
-    templates can be referenced at search time using their given id"
-    ([^Client conn ^String id ^Map document]
-      (create-search-template conn "mustache" id document))
-    ([^Client conn ^String languege ^String id ^Map document]
-      (create conn ".scripts" languege document :id id)))
+(defn create-search-template
+  "Adds a search template to the .scripts index the template should be
+  a map of the form:
+  {:template {:filter {:term {:name \"{{name}}\"}}}}
+  templates can be referenced at search time using their given id"
+  ([^Client conn ^String id ^Map document]
+     (create-search-template conn "mustache" id document))
+  ([^Client conn ^String languege ^String id ^Map document]
+     (create conn ".scripts" languege document :id id)))
 
 (defn async-create
   "Adds document to the search index and returns a future without waiting
