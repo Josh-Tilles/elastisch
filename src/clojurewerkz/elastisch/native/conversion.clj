@@ -1136,11 +1136,13 @@
 
 (defn ^OpenIndexRequest ->open-index-request
   "opens closed index or indices for search"
+  {:doc/format :markdown}
   [index-name]
   (OpenIndexRequest. (->string-array index-name)))
 
 (defn ^CloseIndexRequest ->close-index-request
   "closes index or indices for updating"
+  {:doc/format :markdown}
   [index-name]
   (CloseIndexRequest. (->string-array index-name)))
 
