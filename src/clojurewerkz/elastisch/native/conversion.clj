@@ -836,7 +836,7 @@
    :hits      (map search-hit->map (.getHits hits))})
 
 (defprotocol AggregatorPresenter
-  (aggregation-value [agg] "Presents an aggregation as immutable Clojure map"))
+  (^{:doc/format :markdown} aggregation-value [agg] "Presents an aggregation as immutable Clojure map"))
 
 (defn assoc-aggregation-value
   [acc [^String name agg]]
