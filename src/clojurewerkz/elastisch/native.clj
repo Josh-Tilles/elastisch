@@ -61,36 +61,43 @@
 
 (defn ^ActionFuture index
   "Executes an index action request"
+  {:doc/format :markdown}
   [^Client conn ^IndexRequest req]
   (.index ^Client conn req))
 
 (defn ^ActionFuture get
   "Executes a get action request"
+  {:doc/format :markdown}
   [^Client conn ^GetRequest req]
   (.get ^Client conn req))
 
 (defn ^ActionFuture multi-get
   "Executes a multi-get action request"
+  {:doc/format :markdown}
   [^Client conn ^MultiGetRequest req]
   (.multiGet ^Client conn req))
 
 (defn ^ActionFuture update
   "Executes a update action request"
+  {:doc/format :markdown}
   [^Client conn ^UpdateRequest req]
   (.update ^Client conn req))
 
 (defn ^ActionFuture delete
   "Executes a delete action request"
+  {:doc/format :markdown}
   [^Client conn ^DeleteRequest req]
   (.delete ^Client conn req))
 
 (defn ^ActionFuture count
   "Executes a count action request"
+  {:doc/format :markdown}
   [^Client conn ^CountRequest req]
   (.count ^Client conn req))
 
 (defn ^ActionFuture search
   "Executes a search action request"
+  {:doc/format :markdown}
   [^Client conn ^SearchRequest req]
   (.search ^Client conn req))
 
@@ -100,16 +107,19 @@
 
 (defn ^ActionFuture search-scroll
   "Executes a search action request"
+  {:doc/format :markdown}
   [^Client conn ^SearchScrollRequest req]
   (.searchScroll ^Client conn req))
 
 (defn ^ActionFuture percolate
   "Executes a more-like-this action request"
+  {:doc/format :markdown}
   [^Client conn ^PercolateRequest req]
   (.percolate ^Client conn req))
 
 (defn ^ActionFuture suggest
   "Executes a suggestion action request"
+  {:doc/format :markdown}
   [^Client conn, ^SuggestRequest req]
   (.suggest ^Client conn req))
 
@@ -120,112 +130,134 @@
 
 (defn ^ActionFuture admin-index-exists
   "Executes an indices exist request"
+  {:doc/format :markdown}
   [^Client conn ^IndicesExistsRequest req]
   (-> ^Client conn .admin .indices (.exists req)))
 
 (defn ^ActionFuture admin-types-exists
   "Executes an types exist request"
+  {:doc/format :markdown}
   [^Client conn ^TypesExistsRequest req]
   (-> ^Client conn .admin .indices (.typesExists req)))
 
 (defn ^ActionFuture admin-index-create
   "Executes a create index request"
+  {:doc/format :markdown}
   [^Client conn ^CreateIndexRequest req]
   (-> ^Client conn .admin .indices (.create req)))
 
 (defn ^ActionFuture admin-index-delete
   "Executes a delete index request"
+  {:doc/format :markdown}
   [^Client conn ^DeleteIndexRequest req]
   (-> ^Client conn .admin .indices (.delete req)))
 
 (defn ^ActionFuture admin-update-index-settings
   "Executes an update index settings request"
+  {:doc/format :markdown}
   [^Client conn ^UpdateSettingsRequest req]
   (-> ^Client conn .admin .indices (.updateSettings req)))
 
 (defn ^ActionFuture admin-get-index-settings
   "Executes an update index settings request"
+  {:doc/format :markdown}
   [^Client conn ^GetSettingsRequest req]
   (-> ^Client conn .admin .indices (.getSettings req)))
 
 (defn ^ActionFuture admin-get-mappings
   "Executes a get mapping request"
+  {:doc/format :markdown}
   [^Client conn ^GetMappingsRequest req]
   (-> ^Client conn .admin .indices (.getMappings req)))
 
 (defn ^ActionFuture admin-put-mapping
   "Executes a put mapping request"
+  {:doc/format :markdown}
   [^Client conn ^PutMappingRequest req]
   (-> ^Client conn .admin .indices (.putMapping req)))
 
 (defn ^ActionFuture admin-open-index
   "Executes an open index request"
+  {:doc/format :markdown}
   [^Client conn ^OpenIndexRequest req]
   (-> ^Client conn .admin .indices (.open req)))
 
 (defn ^ActionFuture admin-close-index
   "Executes a close index request"
+  {:doc/format :markdown}
   [^Client conn ^CloseIndexRequest req]
   (-> ^Client conn .admin .indices (.close req)))
 
 ;;DEPRECATED in 2.1- replaced with forceMerge
 (defn ^ActionFuture admin-merge-index
   "Executes a optimize index request"
+  {:doc/format :markdown}
   [^Client conn ^ForceMergeRequest req]
   (-> ^Client conn .admin .indices (.forceMerge req)))
 
 (defn ^ActionFuture admin-flush-index
   "Executes a flush index request"
+  {:doc/format :markdown}
   [^Client conn ^FlushRequest req]
   (-> ^Client conn .admin .indices (.flush req)))
 
 (defn ^ActionFuture admin-refresh-index
   "Executes a refresh index request"
+  {:doc/format :markdown}
   [^Client conn ^RefreshRequest req]
   (-> ^Client conn .admin .indices (.refresh req)))
 
 (defn ^ActionFuture admin-put-repository
   "Executes a put repository request"
+  {:doc/format :markdown}
   [^Client conn ^PutRepositoryRequest req]
   (-> ^Client conn .admin .cluster (.putRepository req)))
 
 (defn ^ActionFuture admin-create-snapshot
   "Executes a create snapshot request"
+  {:doc/format :markdown}
   [^Client conn ^CreateSnapshotRequest req]
   (-> ^Client conn .admin .cluster (.createSnapshot req)))
 
 (defn ^ActionFuture admin-delete-snapshot
   "Executes a delete snapshot request"
+  {:doc/format :markdown}
   [^Client conn ^DeleteSnapshotRequest req]
   (-> ^Client conn .admin .cluster (.deleteSnapshot req)))
 
 (defn ^ActionFuture admin-clear-cache
   "Executes a cache clear request"
+  {:doc/format :markdown}
   [^Client conn ^ClearIndicesCacheRequest req]
   (-> ^Client conn .admin .indices (.clearCache req)))
 
 (defn ^ActionFuture admin-index-stats
   "Executes an indices stats request"
+  {:doc/format :markdown}
   [^Client conn ^IndicesStatsRequest req]
   (-> ^Client conn .admin .indices (.stats req)))
 
 (defn ^ActionFuture admin-index-segments
   "Executes an indices segments request"
+  {:doc/format :markdown}
   [^Client conn ^IndicesSegmentsRequest req]
   (-> ^Client conn .admin .indices (.segments req)))
 
 (defn ^ActionFuture admin-update-aliases
   "Executes an update aliases request"
+  {:doc/format :markdown}
   [^Client conn ^IndicesAliasesRequest req]
   (-> ^Client conn .admin .indices (.aliases req)))
 
 (defn ^ActionFuture admin-put-index-template
   "Executes a put index template request"
+  {:doc/format :markdown}
   [^Client conn ^PutIndexTemplateRequest req]
   (-> ^Client conn .admin .indices (.putTemplate req)))
 
 (defn ^ActionFuture admin-delete-index-template
   "Executes a delete index template request"
+  {:doc/format :markdown}
   [^Client conn ^DeleteIndexTemplateRequest req]
   (-> ^Client conn .admin .indices (.deleteTemplate req)))
 
@@ -237,6 +269,7 @@
 (defn ^Client connect
   "Connects to one or more Elasticsearch cluster nodes using
   TCP/IP communication transport. Returns the client."
+  {:doc/format :markdown}
   ([]
      (.build (TransportClient/builder)))
   ([pairs]
@@ -273,5 +306,6 @@
 (defn ^Client connect-to-local-node
   "Connects to a local Elasticsearch cluster nodes using
   local transport. Returns the client. Supposed to be used for automated testing."
+  {:doc/format :markdown}
   [^Node node]
   (.client node))
