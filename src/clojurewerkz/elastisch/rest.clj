@@ -88,7 +88,8 @@
                                   options
                                   {:accept :json}))))))
 (defn ^:private get*
-  "Like get but takes no connection"
+  "Like [[get]] but takes no connection"
+  {:doc/format :markdown}
   ([^String uri]
    (json/decode (:body (http/get uri {:accept :json :throw-exceptions throw-exceptions}))
                 true))
@@ -133,9 +134,10 @@
   1-arity form constructs a URI for one or more indexes and all mappings in them.
   2-arity form constructs a URI for one or more indexes and given mappings in them.
 
-  Passing index name as \"_all\" means searching across all indexes.
+  Passing index name as `\"_all\"` means searching across all indexes.
 
   To specify multiple indexes or mapping types, pass them as collections"
+  {:doc/format :markdown}
   ([conn]
      (url-with-path conn "_search"))
   ([conn index-name]
@@ -335,6 +337,7 @@
 
 (defn connect
   "Connects to the given Elasticsearch endpoint and returns it"
+  {:doc/format :markdown}
   (^clojurewerkz.elastisch.rest.Connection []
                                            (connect (default-url)))
   (^clojurewerkz.elastisch.rest.Connection [uri]
