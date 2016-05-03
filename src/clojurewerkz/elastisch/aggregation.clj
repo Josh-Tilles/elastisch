@@ -12,7 +12,7 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-(ns clojurewerkz.elastisch.aggregation
+(ns ^{:doc/format :markdown} clojurewerkz.elastisch.aggregation
   "Convenience functions that build various aggregation types.
 
   All functions return maps and are completely optional (but recommended)."
