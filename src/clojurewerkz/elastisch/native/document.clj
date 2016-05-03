@@ -76,8 +76,9 @@
 (defn create-search-template
   "Adds a search template to the .scripts index the template should be
   a map of the form:
-  {:template {:filter {:term {:name \"{{name}}\"}}}}
+  `{:template {:filter {:term {:name \"{{name}}\"}}}}`
   templates can be referenced at search time using their given id"
+  {:doc/format :markdown}
   ([^Client conn ^String id ^Map document]
      (create-search-template conn "mustache" id document))
   ([^Client conn ^String languege ^String id ^Map document]
