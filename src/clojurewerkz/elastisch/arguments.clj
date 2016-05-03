@@ -2,6 +2,7 @@
 
 (defn ->opts
   "Coerces arguments to a map"
+  {:doc/format :markdown}
   [args]
   (let [x (first args)]
     (if (map? x)
