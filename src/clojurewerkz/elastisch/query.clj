@@ -12,7 +12,7 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-(ns clojurewerkz.elastisch.query
+(ns ^{:doc/format :markdown} clojurewerkz.elastisch.query
   "Convenience functions that build various query types.
 
    All functions return maps and are completely optional (but recommended)."
