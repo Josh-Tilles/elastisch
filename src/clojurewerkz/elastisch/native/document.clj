@@ -81,8 +81,8 @@
   {:doc/format :markdown}
   ([^Client conn ^String id ^Map document]
      (create-search-template conn "mustache" id document))
-  ([^Client conn ^String languege ^String id ^Map document]
-     (create conn ".scripts" languege document :id id)))
+  ([^Client conn ^String language ^String id ^Map document]
+     (create conn ".scripts" language document :id id)))
 
 (defn async-create
   "Adds document to the search index and returns a future without waiting
