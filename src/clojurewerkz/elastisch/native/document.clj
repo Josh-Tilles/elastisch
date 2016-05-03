@@ -86,7 +86,8 @@
 
 (defn async-create
   "Adds document to the search index and returns a future without waiting
-  for the response. Takes exactly the same arguments as create."
+  for the response. Takes exactly the same arguments as [[create]]."
+  {:doc/format :markdown}
   ([^Client conn index mapping-type document]
      (future (create conn index mapping-type document)))
   ([^Client conn index mapping-type document & args]
@@ -95,6 +96,7 @@
 (defn put
   "Creates or updates a document in the search index using the provided document id
   and waits for the response."
+  {:doc/format :markdown}
   ([^Client conn index mapping-type id document]
      (let [res (es/index conn (cnv/->index-request index
                                               mapping-type
@@ -112,7 +114,8 @@
 (defn put-search-template
   "Updates a search template in the .scripts index. Templates are expressed
   as maps similar to:
-  {:template {:filter {:term {:name \"{{name}}\"}}}}"
+  `{:template {:filter {:term {:name \"{{name}}\"}}}}`"
+  {:doc/format :markdown}
   ([^Client connid ^String id ^Map document]
     (put-search-template connid "mustache" id document))
   ([^Client connid ^String language  ^String id ^Map document]
@@ -120,7 +123,8 @@
 
 (defn async-put
   "Creates or updates a document in the search index using the provided document id
-  and returns a future without waiting for the response. Takes exactly the same arguments as put."
+  and returns a future without waiting for the response. Takes exactly the same arguments as [[put]]."
+  {:doc/format :markdown}
   ([^Client conn index mapping-type id document]
      (future (put conn index mapping-type id document)))
   ([^Client conn index mapping-type id document & args]
@@ -128,6 +132,7 @@
 
 (defn upsert
   "Updates or creates a document using provided data"
+  {:doc/format :markdown}
   ([^Client conn index mapping-type ^String id ^Map doc]
      (upsert conn index mapping-type id doc {}))
   ([^Client conn index mapping-type ^String id ^Map doc ^Map opts]
