@@ -408,7 +408,8 @@
 (defn suggest
   "Suggests similar looking terms based on a provided text by using a suggester.
   Usage:
-  (suggest es-conn \"locations\" :completion \"Stockh\" {:field \"suggest\" :size 5})"
+  `(suggest es-conn \"locations\" :completion \"Stockh\" {:field \"suggest\" :size 5})`"
+  {:doc/format :markdown}
   [^Client conn indices ^clojure.lang.Keyword suggest-type ^String term ^IPersistentMap opts]
   (let [q (cnv/->suggest-query suggest-type term opts)
         req (-> conn
