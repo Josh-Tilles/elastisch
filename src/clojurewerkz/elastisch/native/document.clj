@@ -310,9 +310,9 @@
 (defn delete-search-template
   "Removes a search template from .scripts index"
   ([^Client conn ^String id]
-    (delete-search-template conn "mustache" id))
+     (delete-search-template conn "mustache" id))
   ([^Client conn ^String languege ^String id]
-    (delete conn ".scripts" languege id)))
+     (delete conn ".scripts" languege id)))
 
 (defn count
   "Performs a count query.
