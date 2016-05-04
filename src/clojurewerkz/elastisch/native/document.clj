@@ -221,8 +221,8 @@
 (defn get-search-template
 ([^Client conn ^String id]
   (get-search-template conn "mustache" id))
-([^Client conn ^String languege ^String id]
-  (get conn ".scripts" languege id)))
+([^Client conn ^String language ^String id]
+  (get conn ".scripts" language id)))
 
 (defn async-get
   "Fetches and returns a document by id or nil if it does not exist.
