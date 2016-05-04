@@ -24,6 +24,7 @@
 
 (defn register-query
   "Registers a percolator for the given index"
+  {:doc/format :markdown}
   [^Connection conn index percolator & args]
   (rest/put conn (rest/percolator-url conn
                                       index percolator)
@@ -31,13 +32,15 @@
 
 (defn unregister-query
   "Unregisters a percolator query for the given index"
+  {:doc/format :markdown}
   [^Connection conn index percolator]
   (rest/delete conn (rest/percolator-url conn
                                          index percolator)))
 
 (defn percolate
   "Percolates a document and see which queries match on it. The document is not indexed, just
-  matched against the queries you register with clojurewerkz.elastisch.rest.percolation/register-query."
+  matched against the queries you register with [[register-query]]."
+  {:doc/format :markdown}
   [^Connection conn index percolator & args]
   ;; rest/get won't serialize the body for us. MK.
   (rest/get conn (rest/index-percolation-url conn
@@ -46,6 +49,7 @@
 
 (defn percolate-existing
   "Percolates an existing document and sees which queries match on it."
+  {:doc/format :markdown}
   [^Connection conn index percolator id]
   (rest/get conn (rest/existing-doc-index-percolation-url conn
                                                           index percolator id)))
