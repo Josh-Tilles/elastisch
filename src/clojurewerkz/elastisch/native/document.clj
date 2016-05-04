@@ -312,7 +312,7 @@
   ([^Client conn ^String id]
      (delete-search-template conn "mustache" id))
   ([^Client conn ^String language ^String id]
-     (delete conn ".scripts" languege id)))
+     (delete conn ".scripts" language id)))
 
 (defn count
   "Performs a count query.
