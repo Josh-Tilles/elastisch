@@ -45,26 +45,29 @@
 (defn create
   "Creates an index.
 
-  Accepted options are :mappings and :settings. Both accept maps with the same structure as in the REST API.
+  Accepted options are `:mappings` and `:settings`. Both accept maps with the same structure as in the REST API.
 
   Examples:
 
-   (require '[clojurewerkz.elastisch.native.index :as idx])
+  ```clojure
+  (require '[clojurewerkz.elastisch.native.index :as idx])
 
-   (idx/create conn \"myapp_development\")
-   (idx/create conn \"myapp_development\" :settings {\"number_of_shards\" 1})
+  (idx/create conn \"myapp_development\")
+  (idx/create conn \"myapp_development\" :settings {\"number_of_shards\" 1})
 
-   (let [mapping-types {:person {:properties {:username   {:type \"string\" :store \"yes\"}
-                                              :first-name {:type \"string\" :store \"yes\"}
-                                              :last-name  {:type \"string\"}
-                                              :age        {:type \"integer\"}
-                                              :title      {:type \"string\" :analyzer \"snowball\"}
-                                              :planet     {:type \"string\"}
-                                              :biography  {:type \"string\" :analyzer \"snowball\" :term_vector \"with_positions_offsets\"}}}}]
-     (idx/create conn \"myapp_development\" :mappings mapping-types))
+  (let [mapping-types {:person {:properties {:username   {:type \"string\" :store \"yes\"}
+                                             :first-name {:type \"string\" :store \"yes\"}
+                                             :last-name  {:type \"string\"}
+                                             :age        {:type \"integer\"}
+                                             :title      {:type \"string\" :analyzer \"snowball\"}
+                                             :planet     {:type \"string\"}
+                                             :biography  {:type \"string\" :analyzer \"snowball\" :term_vector \"with_positions_offsets\"}}}}]
+    (idx/create conn \"myapp_development\" :mappings mapping-types))
+  ```
 
   Related Elasticsearch API Reference section:
-  http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index.html"
+  <http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index.html>"
+  {:doc/format :markdown}
   [^Client conn ^String index-name & args]
   (let [opts                        (ar/->opts args)
         {:keys [settings mappings]} opts
