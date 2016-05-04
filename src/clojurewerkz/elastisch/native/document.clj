@@ -311,7 +311,7 @@
   "Removes a search template from .scripts index"
   ([^Client conn ^String id]
      (delete-search-template conn "mustache" id))
-  ([^Client conn ^String languege ^String id]
+  ([^Client conn ^String language ^String id]
      (delete conn ".scripts" languege id)))
 
 (defn count
