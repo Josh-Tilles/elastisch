@@ -88,13 +88,15 @@
 (def no-hits? (complement any-hits?))
 
 (defn hits-from
-  "Returns search hits from a response as a collection. To retrieve hits overview, get the :hits
+  "Returns search hits from a response as a collection. To retrieve hits overview, get the `:hits`
   key from the response"
+  {:doc/format :markdown}
   [m]
   (get-in m [:hits :hits]))
 
 (defn ids-from
   "Returns search hit ids from a response"
+  {:doc/format :markdown}
   [m]
   (if (any-hits? m)
     (set (map :_id (hits-from m)))
@@ -102,15 +104,18 @@
 
 (defn matches-from
   "Returns matches from a percolation response as a collection."
+  {:doc/format :markdown}
   [m]
   (get m :matches []))
 
 (defn aggregations-from
   "Returns aggregations from a search response"
+  {:doc/format :markdown}
   [m]
   (get m :aggregations []))
 
 (defn aggregation-from
   "Return a single aggregation from a search response"
+  {:doc/format :markdown}
   [m name]
   (get-in m [:aggregations name] []))
