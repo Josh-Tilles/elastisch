@@ -41,6 +41,7 @@
 
 (defn bulk-index
   "generates the content for a bulk insert operation"
+  {:doc/format :markdown}
   ([documents]
      (let [operations (map index-operation documents)
            documents  (map #(apply dissoc % special-operation-keys) documents)]
@@ -48,6 +49,7 @@
 
 (defn bulk-create
   "generates the content for a bulk create operation"
+  {:doc/format :markdown}
   ([documents]
      (let [operations (map create-operation documents)
            documents  (map #(apply dissoc % special-operation-keys) documents)]
@@ -55,6 +57,7 @@
 
 (defn bulk-update
   "generates the content for a bulk update operation"
+  {:doc/format :markdown}
   ([documents]
      (let [operations (map update-operation documents)
            documents  (map #(apply dissoc % special-operation-keys) documents)]
@@ -62,5 +65,6 @@
 
 (defn bulk-delete
   "generates the content for a bulk delete operation"
+  {:doc/format :markdown}
   ([documents]
    (map delete-operation documents)))
