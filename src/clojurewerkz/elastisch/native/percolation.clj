@@ -31,6 +31,7 @@
 
 (defn register-query
   "Registers a percolator for the given index"
+  {:doc/format :markdown}
   [^Client conn index query-name & args]
   (let [opts                     (ar/->opts args)
         ^IndexRequestBuilder irb (doto (.prepareIndex ^Client conn
@@ -44,6 +45,7 @@
 
 (defn unregister-query
   "Unregisters a percolator query for the given index"
+  {:doc/format :markdown}
   [^Client conn index percolator]
   (let [ft (es/delete conn (cnv/->delete-request index
                                                  PercolatorService/TYPE_NAME
