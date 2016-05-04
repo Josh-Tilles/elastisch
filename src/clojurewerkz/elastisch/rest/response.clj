@@ -57,7 +57,8 @@
   (:accepted m))
 
 (defn valid?
-  "Returns true if a validation query response indicates valid query, false otherwise"
+  "Returns `true` if a validation query response indicates valid query, `false` otherwise"
+  {:doc/format :markdown}
   [m]
   (:valid m))
 
@@ -68,16 +69,19 @@
 
 (defn total-hits
   "Returns number of search hits from a response"
+  {:doc/format :markdown}
   [m]
   (get-in m [:hits :total]))
 
 (defn count-from
   "Returns total number of search hits from a response"
+  {:doc/format :markdown}
   [m]
   (get m :count))
 
 (defn any-hits?
-  "Returns true if a response has any search hits, false otherwise"
+  "Returns `true` if a response has any search hits, `false` otherwise"
+  {:doc/format :markdown}
   [m]
   (> (total-hits m) 0))
 
