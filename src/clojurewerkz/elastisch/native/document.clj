@@ -309,6 +309,7 @@
 
 (defn delete-search-template
   "Removes a search template from .scripts index"
+  {:doc/format :markdown}
   ([^Client conn ^String id]
      (delete-search-template conn "mustache" id))
   ([^Client conn ^String language ^String id]
@@ -319,11 +320,14 @@
 
   Examples:
 
+  ```clojure
   (require '[clojurewerkz.elastisch.native.document :as doc])
   (require '[clojurewerkz.elastisch.query :as q])
 
   (doc/count conn \"people\" \"person\")
-  (doc/count conn \"people\" \"person\" (q/prefix :username \"appl\"))"
+  (doc/count conn \"people\" \"person\" (q/prefix :username \"appl\"))
+  ```"
+  {:doc/format :markdown}
   ([^Client conn index mapping-type]
      (count conn index mapping-type (q/match-all)))
   ([^Client conn index mapping-type query]
@@ -343,10 +347,13 @@
 
   Examples:
 
+  ```clojure
   (require '[clojurewerkz.elastisch.native.document :as doc])
   (require '[clojurewerkz.elastisch.query :as q])
 
-  (doc/search conn \"people\" \"person\" :query (q/prefix :username \"appl\"))"
+  (doc/search conn \"people\" \"person\" :query (q/prefix :username \"appl\"))
+  ```"
+  {:doc/format :markdown}
   [^Client conn index mapping-type & args]
   (let [ft (es/search conn
                       (cnv/->search-request index mapping-type (ar/->opts args)))
@@ -355,6 +362,7 @@
 
 (defn search-all-types
   "Performs a search query across one or more indexes and all mapping types."
+  {:doc/format :markdown}
   [^Client conn index & args]
   (let [ft                  (es/search conn (cnv/->search-request index nil (ar/->opts args)))
         ^SearchResponse res (.actionGet ft)]
@@ -363,6 +371,7 @@
 (defn search-all-indexes-and-types
   "Performs a search query across all indexes and all mapping types. This may put very high load on your
   Elasticsearch cluster so use this function with care."
+  {:doc/format :markdown}
   [^Client conn & args]
   (let [ft                  (es/search conn (cnv/->search-request [] nil (ar/->opts args)))
         ^SearchResponse res (.actionGet ft)]
@@ -371,6 +380,7 @@
 (defn scroll
   "Performs a scroll query, fetching the next page of results from a
   query given a scroll id"
+  {:doc/format :markdown}
   [^Client conn scroll-id & args]
   (let [ft                  (es/search-scroll conn (cnv/->search-scroll-request scroll-id (ar/->opts args)))
         ^SearchResponse res (.actionGet ft)]
@@ -378,6 +388,7 @@
 
 (defn scroll-seq
   "Returns a lazy sequence of all documents for a given scroll query"
+  {:doc/format :markdown}
   ([^Client conn prev-resp {:keys [search_type]}]
    (let [hits (r/hits-from prev-resp)
          scroll-id (:_scroll_id prev-resp)]
@@ -389,6 +400,7 @@
 
 (defn replace
   "Replaces document with given id with a new one"
+  {:doc/format :markdown}
   [^Client conn index mapping-type id document]
   (delete conn index mapping-type id)
   (put conn index mapping-type id document))
