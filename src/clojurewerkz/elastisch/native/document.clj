@@ -225,8 +225,9 @@
      (get conn ".scripts" language id)))
 
 (defn async-get
-  "Fetches and returns a document by id or nil if it does not exist.
+  "Fetches and returns a document by id or `nil` if it does not exist.
   Returns a future without waiting."
+  {:doc/format :markdown}
   ([^Client conn index mapping-type id]
      (future (get conn index mapping-type id)))
   ([^Client conn index mapping-type id & args]
@@ -235,30 +236,37 @@
 (defn present?
   "Returns true if a document with the given id is present in the provided index
   with the given mapping type."
+  {:doc/format :markdown}
   [^Client conn index mapping-type id]
   (not (nil? (get conn index mapping-type id))))
 
 (defn multi-get
   "Multi get returns only documents that are found (exist).
 
-  Queries can passed as a collection of maps with three keys: :_index,
-  :_type and :_id:
+  Queries can passed as a collection of maps with three keys: `:_index`,
+  `:_type` and `:_id`:
 
+  ```clojure
   (doc/multi-get conn [{:_index index-name :_type mapping-type :_id \"1\"}
                        {:_index index-name :_type mapping-type :_id \"2\"}])
-
+  ```
 
   2-argument version accepts an index name that eliminates the need to include
-  :_index in every query map:
+  `:_index` in every query map:
 
+  ```clojure
   (doc/multi-get conn index-name [{:_type mapping-type :_id \"1\"}
                                   {:_type mapping-type :_id \"2\"}])
+  ```
 
   3-argument version also accepts a mapping type that eliminates the need to include
-  :_type in every query map:
+  `:_type` in every query map:
 
+  ```clojure
   (doc/multi-get conn index-name mapping-type [{:_id \"1\"}
-                                               {:_id \"2\"}])"
+                                               {:_id \"2\"}])
+  ```"
+  {:doc/format :markdown}
   ([^Client conn queries]
      ;; example response from the REST API:
      ;; ({:_index people, :_type person, :_id 1, :_version 1, :exists true, :_source {...}})
@@ -284,9 +292,12 @@
 
   Examples:
 
+  ```clojure
   (require '[clojurewerkz.elastisch.native.document :as doc])
 
-  (doc/delete conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\")"
+  (doc/delete conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\")
+  ```"
+  {:doc/format :markdown}
   ([^Client conn index mapping-type id]
      (let [ft                  (es/delete conn (cnv/->delete-request index mapping-type id))
            ^DeleteResponse res (.actionGet ft)]
