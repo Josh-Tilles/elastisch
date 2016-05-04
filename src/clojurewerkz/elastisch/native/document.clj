@@ -145,6 +145,7 @@
 
 (defn update-with-partial-doc
   "Updates an existing document in the search index with given partial document"
+  {:doc/format :markdown}
   ([^Client conn index mapping-type ^String id ^Map partial-doc]
      (update-with-partial-doc conn index mapping-type id partial-doc {}))
   ([^Client conn index mapping-type ^String id ^Map partial-doc ^Map opts]
@@ -157,6 +158,7 @@
 
 (defn update-with-script
   "Updates a document using a script"
+  {:doc/format :markdown}
   ([^Client conn index mapping-type ^String id ^String script]
      (let [res (es/update conn (cnv/->update-request index
                                                 mapping-type
@@ -188,14 +190,17 @@
 
 
 (defn get
-  "Fetches and returns a document by id or nil if it does not exist.
+  "Fetches and returns a document by id or `nil` if it does not exist.
   Waits for response.
 
   Examples:
 
+  ```clojure
   (require '[clojurewerkz.elastisch.native.document :as doc])
 
-  (doc/get conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\")"
+  (doc/get conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\")
+  ```"
+  {:doc/format :markdown}
   ([^Client conn index mapping-type id]
      (let [ft               (es/get conn (cnv/->get-request index
                                                        mapping-type
