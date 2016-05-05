@@ -57,7 +57,6 @@
 
   (doc/create conn \"people\" \"person\" {:first-name \"John\" :last-name \"Appleseed\" :age 28} :id \"1825c5432775b8d1a477acfae57e91ac8c767aed\")
   ```"
-  {:doc/format :markdown}
   ([^Client conn index mapping-type document]
      (let [res (es/index conn (cnv/->index-request index
                                                           mapping-type
@@ -78,7 +77,6 @@
   a map of the form:
   `{:template {:filter {:term {:name \"{{name}}\"}}}}`
   templates can be referenced at search time using their given id"
-  {:doc/format :markdown}
   ([^Client conn ^String id ^Map document]
      (create-search-template conn "mustache" id document))
   ([^Client conn ^String language ^String id ^Map document]
@@ -87,7 +85,6 @@
 (defn async-create
   "Adds document to the search index and returns a future without waiting
   for the response. Takes exactly the same arguments as [[create]]."
-  {:doc/format :markdown}
   ([^Client conn index mapping-type document]
      (future (create conn index mapping-type document)))
   ([^Client conn index mapping-type document & args]
@@ -96,7 +93,6 @@
 (defn put
   "Creates or updates a document in the search index using the provided document id
   and waits for the response."
-  {:doc/format :markdown}
   ([^Client conn index mapping-type id document]
      (let [res (es/index conn (cnv/->index-request index
                                               mapping-type
@@ -115,7 +111,6 @@
   "Updates a search template in the .scripts index. Templates are expressed
   as maps similar to:
   `{:template {:filter {:term {:name \"{{name}}\"}}}}`"
-  {:doc/format :markdown}
   ([^Client connid ^String id ^Map document]
     (put-search-template connid "mustache" id document))
   ([^Client connid ^String language  ^String id ^Map document]
@@ -124,7 +119,6 @@
 (defn async-put
   "Creates or updates a document in the search index using the provided document id
   and returns a future without waiting for the response. Takes exactly the same arguments as [[put]]."
-  {:doc/format :markdown}
   ([^Client conn index mapping-type id document]
      (future (put conn index mapping-type id document)))
   ([^Client conn index mapping-type id document & args]
@@ -132,7 +126,6 @@
 
 (defn upsert
   "Updates or creates a document using provided data"
-  {:doc/format :markdown}
   ([^Client conn index mapping-type ^String id ^Map doc]
      (upsert conn index mapping-type id doc {}))
   ([^Client conn index mapping-type ^String id ^Map doc ^Map opts]
@@ -145,7 +138,6 @@
 
 (defn update-with-partial-doc
   "Updates an existing document in the search index with given partial document"
-  {:doc/format :markdown}
   ([^Client conn index mapping-type ^String id ^Map partial-doc]
      (update-with-partial-doc conn index mapping-type id partial-doc {}))
   ([^Client conn index mapping-type ^String id ^Map partial-doc ^Map opts]
@@ -158,7 +150,6 @@
 
 (defn update-with-script
   "Updates a document using a script"
-  {:doc/format :markdown}
   ([^Client conn index mapping-type ^String id ^String script]
      (let [res (es/update conn (cnv/->update-request index
                                                 mapping-type
@@ -200,7 +191,6 @@
 
   (doc/get conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\")
   ```"
-  {:doc/format :markdown}
   ([^Client conn index mapping-type id]
      (let [ft               (es/get conn (cnv/->get-request index
                                                        mapping-type
@@ -227,7 +217,6 @@
 (defn async-get
   "Fetches and returns a document by id or `nil` if it does not exist.
   Returns a future without waiting."
-  {:doc/format :markdown}
   ([^Client conn index mapping-type id]
      (future (get conn index mapping-type id)))
   ([^Client conn index mapping-type id & args]
@@ -236,7 +225,6 @@
 (defn present?
   "Returns true if a document with the given id is present in the provided index
   with the given mapping type."
-  {:doc/format :markdown}
   [^Client conn index mapping-type id]
   (not (nil? (get conn index mapping-type id))))
 
@@ -266,7 +254,6 @@
   (doc/multi-get conn index-name mapping-type [{:_id \"1\"}
                                                {:_id \"2\"}])
   ```"
-  {:doc/format :markdown}
   ([^Client conn queries]
      ;; example response from the REST API:
      ;; ({:_index people, :_type person, :_id 1, :_version 1, :exists true, :_source {...}})
@@ -297,7 +284,6 @@
 
   (doc/delete conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\")
   ```"
-  {:doc/format :markdown}
   ([^Client conn index mapping-type id]
      (let [ft                  (es/delete conn (cnv/->delete-request index mapping-type id))
            ^DeleteResponse res (.actionGet ft)]
@@ -309,7 +295,6 @@
 
 (defn delete-search-template
   "Removes a search template from .scripts index"
-  {:doc/format :markdown}
   ([^Client conn ^String id]
      (delete-search-template conn "mustache" id))
   ([^Client conn ^String language ^String id]
@@ -327,7 +312,6 @@
   (doc/count conn \"people\" \"person\")
   (doc/count conn \"people\" \"person\" (q/prefix :username \"appl\"))
   ```"
-  {:doc/format :markdown}
   ([^Client conn index mapping-type]
      (count conn index mapping-type (q/match-all)))
   ([^Client conn index mapping-type query]
@@ -353,7 +337,6 @@
 
   (doc/search conn \"people\" \"person\" :query (q/prefix :username \"appl\"))
   ```"
-  {:doc/format :markdown}
   [^Client conn index mapping-type & args]
   (let [ft (es/search conn
                       (cnv/->search-request index mapping-type (ar/->opts args)))
@@ -362,7 +345,6 @@
 
 (defn search-all-types
   "Performs a search query across one or more indexes and all mapping types."
-  {:doc/format :markdown}
   [^Client conn index & args]
   (let [ft                  (es/search conn (cnv/->search-request index nil (ar/->opts args)))
         ^SearchResponse res (.actionGet ft)]
@@ -371,7 +353,6 @@
 (defn search-all-indexes-and-types
   "Performs a search query across all indexes and all mapping types. This may put very high load on your
   Elasticsearch cluster so use this function with care."
-  {:doc/format :markdown}
   [^Client conn & args]
   (let [ft                  (es/search conn (cnv/->search-request [] nil (ar/->opts args)))
         ^SearchResponse res (.actionGet ft)]
@@ -380,7 +361,6 @@
 (defn scroll
   "Performs a scroll query, fetching the next page of results from a
   query given a scroll id"
-  {:doc/format :markdown}
   [^Client conn scroll-id & args]
   (let [ft                  (es/search-scroll conn (cnv/->search-scroll-request scroll-id (ar/->opts args)))
         ^SearchResponse res (.actionGet ft)]
@@ -388,7 +368,6 @@
 
 (defn scroll-seq
   "Returns a lazy sequence of all documents for a given scroll query"
-  {:doc/format :markdown}
   ([^Client conn prev-resp {:keys [search_type]}]
    (let [hits (r/hits-from prev-resp)
          scroll-id (:_scroll_id prev-resp)]
@@ -400,7 +379,6 @@
 
 (defn replace
   "Replaces document with given id with a new one"
-  {:doc/format :markdown}
   [^Client conn index mapping-type id document]
   (delete conn index mapping-type id)
   (put conn index mapping-type id document))
@@ -409,7 +387,6 @@
   "Suggests similar looking terms based on a provided text by using a suggester.
   Usage:
   `(suggest es-conn \"locations\" :completion \"Stockh\" {:field \"suggest\" :size 5})`"
-  {:doc/format :markdown}
   [^Client conn indices ^clojure.lang.Keyword suggest-type ^String term ^IPersistentMap opts]
   (let [q (cnv/->suggest-query suggest-type term opts)
         req (-> conn

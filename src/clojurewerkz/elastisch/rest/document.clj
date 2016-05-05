@@ -12,7 +12,7 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-(ns ^{:doc/format :markdown} clojurewerkz.elastisch.rest.document
+(ns clojurewerkz.elastisch.rest.document
   "Key operations on documents: indexing, search, deletion, etc"
   (:refer-clojure :exclude [get replace count sort])
   (:require [clojurewerkz.elastisch.rest :as rest]
@@ -56,7 +56,6 @@
 
   (doc/create conn \"people\" \"person\" {:first-name \"John\" :last-name \"Appleseed\" :age 28} :id \"1825c5432775b8d1a477acfae57e91ac8c767aed\")
   ```"
-  {:doc/format :markdown}
   ([^Connection conn index mapping-type document & args]
      (rest/post conn (rest/mapping-type-url conn
                                             index mapping-type)
@@ -64,7 +63,6 @@
 
 (defn put
   "Creates or updates a document in the search index, using the provided document id"
-  {:doc/format :markdown}
   ([^Connection conn index mapping-type id document]
      (rest/put conn (rest/record-url conn
                                      index mapping-type id)
@@ -77,7 +75,6 @@
 (defn upsert
   "Updates an existing document in the search index with given partial document,
   the provided document will be inserted if the document does not already exist"
-  {:doc/format :markdown}
   ([^Connection conn index mapping-type id partial-doc]
     (rest/post conn (rest/record-update-url conn
                                             index mapping-type id) {:body {:doc partial-doc
@@ -91,7 +88,6 @@
 
 (defn update-with-partial-doc
   "Updates an existing document in the search index with given partial document"
-  {:doc/format :markdown}
   ([^Connection conn index mapping-type id partial-doc]
      (rest/post conn (rest/record-update-url conn
                                              index mapping-type id) {:body {:doc partial-doc}}))
@@ -111,7 +107,6 @@
   (doc/update-with-script conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\"
                                \"ctx._source.age = ctx._source.age += 1\" {} :lang \"groovy\")
   ```"
-  {:doc/format :markdown}
   ([^Connection conn index mapping-type id script]
      (rest/post conn (rest/record-update-url conn
                                              index mapping-type id)
@@ -137,7 +132,6 @@
 
   (doc/get conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\")
   ```"
-  {:doc/format :markdown}
   [^Connection conn index mapping-type id & args]
   (let [result (rest/get conn (rest/record-url conn
                                                index mapping-type id)
@@ -148,7 +142,6 @@
 
 (defn delete
   "Deletes document from the index."
-  {:doc/format :markdown}
   ([^Connection conn index mapping-type id]
      (rest/delete conn (rest/record-url conn
                                         index mapping-type id)))
@@ -160,7 +153,6 @@
 (defn present?
   "Returns true if a document with the given id is present in the provided index
   with the given mapping type."
-  {:doc/format :markdown}
   [^Connection conn index mapping-type id]
   (not (nil? (get conn index mapping-type id))))
 
@@ -190,7 +182,6 @@
   (doc/multi-get conn index-name mapping-type [{:_id \"1\"}
                                                {:_id \"2\"}])
   ```"
-  {:doc/format :markdown}
   ([^Connection conn query]
      (let [results (rest/post conn (rest/index-mget-url conn)
                               {:body {:docs query}})]
@@ -219,7 +210,6 @@
 
   (doc/search conn \"people\" \"person\" :query (q/prefix :username \"appl\"))
   ```"
-  {:doc/format :markdown}
   [^Connection conn index mapping-type & args]
   (let [opts (ar/->opts args)
         qk   [:search_type :scroll :routing :preference :ignore_unavailable]
@@ -233,7 +223,6 @@
 
 (defn search-all-types
   "Performs a search query across one or more indexes and all mapping types."
-  {:doc/format :markdown}
   [^Connection conn index & args]
   (let [opts (ar/->opts args)
         qk   [:search_type :scroll :routing :preference :ignore_unavailable]
@@ -248,7 +237,6 @@
   "Performs a search query across all indexes and all mapping types.
   This may put very high load on your Elasticsearch cluster so use
   this function with care."
-  {:doc/format :markdown}
   [^Connection conn & args]
   (let [opts (ar/->opts args)
         qk   [:search_type :scroll :routing :preference]
@@ -261,7 +249,6 @@
 (defn scroll
   "Performs a scroll query, fetching the next page of results from a
   query given a scroll id"
-  {:doc/format :markdown}
   [^Connection conn scroll-id & args]
   (let [opts (ar/->opts args)
         qk   [:search_type :scroll :routing :preference]
@@ -273,7 +260,6 @@
 
 (defn scroll-seq
   "Returns a lazy sequence of all documents for a given scroll query"
-  {:doc/format :markdown}
   ([^Connection conn prev-resp {:keys [search_type]}]
    (let [hits (hits-from prev-resp)
          scroll-id (:_scroll_id prev-resp)]
@@ -285,7 +271,6 @@
 
 (defn replace
   "Replaces document with given id with a new one"
-  {:doc/format :markdown}
   [^Connection conn index mapping-type id document]
   (delete conn index mapping-type id)
   (put conn index mapping-type id document))
@@ -303,7 +288,6 @@
   (doc/count conn \"people\" \"person\")
   (doc/count conn \"people\" \"person\" (q/prefix :username \"appl\"))
   ```"
-  {:doc/format :markdown}
   ([^Connection conn index mapping-type]
      (rest/get conn (rest/count-url conn
                                     (join-names index) (join-names mapping-type))))
@@ -325,7 +309,6 @@
 ;;NB! requires delete-by-query plugin
 (defn delete-by-query
   "Performs a delete-by-query operation."
-  {:doc/format :markdown}
   ([^Connection conn index mapping-type query]
      (rest/delete conn
                   (rest/delete-by-query-url
@@ -346,7 +329,6 @@
 
 (defn delete-by-query-across-all-types
   "Performs a delete-by-query operation across all mapping types."
-  {:doc/format :markdown}
   ([^Connection conn index query]
      (rest/delete conn
                   (rest/delete-by-query-url conn (join-names index))
@@ -362,7 +344,6 @@
 (defn delete-by-query-across-all-indexes-and-types
   "Performs a delete-by-query operation across all indexes and mapping types.
   This may put very high load on your Elasticsearch cluster so use this function with care."
-  {:doc/format :markdown}
   ([^Connection conn query]
      (rest/delete conn (rest/delete-by-query-url conn) {:body {:query query}}))
   ([^Connection conn query & args]
@@ -373,7 +354,6 @@
 
 (defn more-like-this
   "Performs a More Like This (MLT) query."
-  {:doc/format :markdown}
   [^Connection conn index mapping-type & args]
   (rest/get conn
             (rest/more-like-this-url conn index mapping-type)
@@ -382,7 +362,6 @@
 (defn validate-query
   "Validates a query without actually executing it. Has the same API as [[search]]
   but does not take the `mapping-type` parameter."
-  {:doc/format :markdown}
   [^Connection conn index query & args]
   (rest/get conn (rest/query-validation-url conn
                                             index)
@@ -401,7 +380,6 @@
   (doc/analyze conn \"foo bar baz\" :analyzer \"whitespace\")
   (doc/analyze conn \"foo bar baz\" :index \"some-index-name\" :field \"some-field-name\")
   ```"
-  {:doc/format :markdown}
   ([^Connection conn text & args]
      (let [opts (ar/->opts args)]
        (rest/get conn (rest/analyze-url conn

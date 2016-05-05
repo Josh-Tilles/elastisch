@@ -20,7 +20,6 @@
 
 (defn search
   "Performs multi search"
-  {:doc/format :markdown}
   [^Client conn queries & params]
   (let [opts (ar/->opts params)
         res  (es/multi-search conn (cnv/->multi-search-request conn queries opts))]
@@ -28,7 +27,6 @@
 
 (defn search-with-index
   "Performs multi search defaulting to the index specified"
-  {:doc/format :markdown}
   [^Client conn index queries & params]
   (let [opts (ar/->opts params)
         res  (es/multi-search conn (cnv/->multi-search-request conn index queries opts))]
@@ -36,7 +34,6 @@
 
 (defn search-with-index-and-type
   "Performs multi search defaulting to the index and type specified"
-  {:doc/format :markdown}
   [^Client conn index mapping-type queries & params]
   (let [opts (ar/->opts params)
         res  (es/multi-search conn (cnv/->multi-search-request conn

@@ -35,7 +35,6 @@
   (admin/cluster-health conn :index [\"index1\",\"index2\"])
   (admin/cluster-health conn :index \"index1\" :pretty true :level \"indices\")
   ```"
-  {:doc/format :markdown}
   [^Connection conn & args]
   (let [opts (ar/->opts args)]
     (rest/get conn (rest/cluster-health-url conn
@@ -52,7 +51,6 @@
 
   (admin/cluster-state conn)
   ```"
-  {:doc/format :markdown}
   [^Connection conn & args]
   (rest/get conn (rest/cluster-state-url conn) {:query-params (ar/->opts args)}))
 
@@ -68,7 +66,6 @@
   (admin/nodes-stats conn)
   (admin/nodes-stats conn :nodes [\"10.0.0.1\", \"10.0.0.2\"] :attributes [\"os\" \"plugins\"])
   ```"
-  {:doc/format :markdown}
   [^Connection conn & args]
   (let [opts (ar/->opts args)]
     (rest/get conn (rest/cluster-nodes-stats-url conn
@@ -86,7 +83,6 @@
   (admin/nodes-info conn)
   (admin/nodes-info conn :nodes [\"10.0.0.1\", \"10.0.0.2\"] :attributes [\"os\" \"plugins\"])
   ```"
-  {:doc/format :markdown}
   [^Connection conn & args]
   (let [opts (ar/->opts args)]
     (rest/get conn (rest/cluster-nodes-info-url conn

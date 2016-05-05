@@ -30,20 +30,17 @@
 
 (defn search
   "Performs multi search"
-  {:doc/format :markdown}
   [conn queries & params]
   (:responses (msearch-with-url conn (rest/multi-search-url conn) queries params)))
 
 (defn search-with-index
   "Performs multi search defaulting to the index specified"
-  {:doc/format :markdown}
   [^Connection conn index queries & params]
   (:responses (msearch-with-url conn (rest/multi-search-url conn
                                                             index) queries params)))
 
 (defn search-with-index-and-type
   "Performs multi search defaulting to the index and type specified"
-  {:doc/format :markdown}
   [^Connection conn index mapping-type queries & params]
   (:responses (msearch-with-url conn (rest/multi-search-url conn
                                                             index mapping-type)

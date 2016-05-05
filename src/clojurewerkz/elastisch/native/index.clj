@@ -67,7 +67,6 @@
 
   Related Elasticsearch API Reference section:
   <http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index.html>"
-  {:doc/format :markdown}
   [^Client conn ^String index-name & args]
   (let [opts                        (ar/->opts args)
         {:keys [settings mappings]} opts
@@ -78,7 +77,6 @@
 
 (defn exists?
   "Returns `true` if given index (or indices) exists"
-  {:doc/format :markdown}
   [^Client conn ^String index-name]
   (let [ft                        (es/admin-index-exists conn (cnv/->index-exists-request index-name))
         ^IndicesExistsResponse res (.actionGet ft)]
@@ -87,7 +85,6 @@
 
 (defn type-exists?
   "Returns `true` if a type/types exists in an index/indices"
-  {:doc/format :markdown}
   [^Client conn ^String index-name type-name]
   (let [ft                        (es/admin-types-exists conn (cnv/->types-exists-request index-name type-name))
         ^TypesExistsResponse res (.actionGet ft)]
@@ -96,7 +93,6 @@
 
 (defn delete
   "Deletes an existing index"
-  {:doc/format :markdown}
   ([^Client conn]
      (let [ft                       (es/admin-index-delete conn (cnv/->delete-index-request))
            ^DeleteIndexResponse res (.actionGet ft)]
@@ -110,7 +106,6 @@
   "The get mapping API allows to retrieve mapping definition of index or index/type.
 
   API Reference: <http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping.html>"
-  {:doc/format :markdown}
   ([^Client conn ^String index-name]
      (let [ft                       (es/admin-get-mappings conn (cnv/->get-mappings-request))
            ^GetMappingsResponse res (.actionGet ft)]
@@ -122,7 +117,6 @@
 
 (defn update-mapping
   "The put mapping API allows to register or modify specific mapping definition for a specific type."
-  {:doc/format :markdown}
   [^Client conn ^String index-name ^String mapping-type & args]
   (let [opts                    (ar/->opts args)
         ft                      (es/admin-put-mapping conn (cnv/->put-mapping-request index-name mapping-type opts))
@@ -131,7 +125,6 @@
 
 (defn update-settings
   "Updates index settings. No argument version updates index settings globally"
-  {:doc/format :markdown}
   ([^Client conn index-name settings]
      (let [ft (es/admin-update-index-settings conn (cnv/->update-settings-request index-name settings))]
        (.actionGet ft)
@@ -139,7 +132,6 @@
 
 (defn get-settings
   "Gets index settings."
-  {:doc/format :markdown}
   ([^Client conn index-name]
      (let [ft (es/admin-get-index-settings conn (cnv/->get-settings-request index-name))
            res (.actionGet ft)]
@@ -147,7 +139,6 @@
 
 (defn open
   "Opens an index"
-  {:doc/format :markdown}
   [^Client conn index-name]
   (let [ft (es/admin-open-index conn (cnv/->open-index-request index-name))
         ^OpenIndexResponse res (.actionGet ft)]
@@ -162,7 +153,6 @@
   (idx/close conn \"my-index\")
   (idx/close conn [\"my-index\" \"dein-index\"])
   ```"
-  {:doc/format :markdown}
   [^Client conn index-name]
   (let [ft (es/admin-close-index conn (cnv/->close-index-request index-name))
         ^CloseIndexResponse res (.actionGet ft)]
@@ -170,7 +160,6 @@
 
 (defn force-merge
   "Optimizes an index or multiple indices"
-  {:doc/format :markdown}
   [^Client conn index-name & args]
   (let [opts (ar/->opts args)
         ft   (es/admin-merge-index
@@ -181,7 +170,6 @@
 
 (defn flush
   "Flushes an index or multiple indices"
-  {:doc/format :markdown}
   [^Client conn index-name & args]
   (let [opts               (ar/->opts args)
         ft                 (es/admin-flush-index conn (cnv/->flush-index-request index-name opts))
@@ -190,7 +178,6 @@
 
 (defn refresh
   "Refreshes an index or multiple indices"
-  {:doc/format :markdown}
   [^Client conn index-name]
   (let [ft                 (es/admin-refresh-index conn (cnv/->refresh-index-request index-name))
         ^RefreshResponse res (.actionGet ft)]
@@ -198,7 +185,6 @@
 
 (defn clear-cache
   "Clears caches index or multiple indices"
-  {:doc/format :markdown}
   [^Client conn index-name & args]
   (let [opts                           (ar/->opts args)
         ft                             (es/admin-clear-cache conn (cnv/->clear-indices-cache-request index-name opts))
@@ -221,7 +207,6 @@
   * `:merge`: merge operation stats
   * `:flush`: flush operation stats
   * `:refresh`: refresh operation stats"
-  {:doc/format :markdown}
   ([^Client conn]
      (let [ft                        (es/admin-index-stats conn (cnv/->index-stats-request))
            ^IndicesStatsResponse res (.actionGet ft)]
@@ -236,7 +221,6 @@
 
 (defn segments
   "Returns segments information for one or more indices."
-  {:doc/format :markdown}
   [^Client conn index-name]
   (let [ft                           (es/admin-index-segments conn (cnv/->indices-segments-request index-name))
         ^IndicesSegmentResponse res (.actionGet ft)]
@@ -251,7 +235,6 @@
   [{:add    { :indices \"test1\" :alias \"alias1\" }}
    {:remove { :index \"test1\" :aliases \"alias1\" }}]
   ```"
-  {:doc/format :markdown}
   [^Client conn ops & args]
   (let [opts                        (ar/->opts args)
         ft                          (es/admin-update-aliases conn (cnv/->indices-aliases-request ops opts))

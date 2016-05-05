@@ -52,7 +52,6 @@
 
 (defn bulk
   "Performs a bulk operation"
-  {:doc/format :markdown}
   [^Client conn operations & params]
   (let [^BulkRequestBuilder req (reduce #(add-operation %2 %1) (.prepareBulk conn)
                                         (cnv/->action-requests operations))]
@@ -65,13 +64,11 @@
 
 (defn bulk-with-index
   "Performs a bulk operation defaulting to the index specified"
-  {:doc/format :markdown}
   [^Client conn index operations & params]
   (bulk conn (map #(add-default % {:_index index}) operations) params))
 
 (defn bulk-with-index-and-type
   "Performs a bulk operation defaulting to the index and type specified"
-  {:doc/format :markdown}
   [^Client conn index mapping-type operations & params]
   (bulk conn
         (map #(add-default % {:_index index :_type mapping-type}) operations)

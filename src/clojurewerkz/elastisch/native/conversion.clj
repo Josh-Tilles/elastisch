@@ -105,7 +105,6 @@
 
 (defn ^{:tag "[Ljava.lang.String;"} ->string-array
   "Coerces argument to an array of strings"
-  {:doc/format :markdown}
   [index-name]
   (if (coll? index-name)
     (into-array String index-name)
@@ -159,7 +158,7 @@
     input))
 
 (defprotocol VersionTypeConversion
-  (^{:tag VersionType, :doc/format :markdown} to-version-type [input] "Picks a content type for given input" {:doc/format :markdown}))
+  (^{:tag VersionType} to-version-type [input] "Picks a content type for given input"))
 
 (extend-protocol VersionTypeConversion
   clojure.lang.Named
@@ -188,7 +187,6 @@
 
 (defn ^Settings ->settings
   "Converts a Clojure map into immutable Elasticsearch settings"
-  {:doc/format :markdown}
   [m]
   (if m
     (let [^Settings$Builder sb (Settings/builder)]
@@ -216,7 +214,6 @@
 
 (defn ^IndexRequest ->index-request
   "Builds an index action request"
-  {:doc/format :markdown}
   ([index mapping-type ^Map doc]
      ;; default content type used by IndexRequest is JSON. MK.
      (-> (IndexRequest. (name index) (name mapping-type))
@@ -259,7 +256,6 @@
 
 (defn ^IPersistentMap index-response->map
   "Converts an index action response to a Clojure map"
-  {:doc/format :markdown}
   [^IndexResponse r]
   ;; underscored aliases are there to match REST API responses
   {:index    (.getIndex r)
@@ -278,7 +274,6 @@
 
 (defn ^GetRequest ->get-request
   "Builds a get action request"
-  {:doc/format :markdown}
   ([index mapping-type ^String id]
      (GetRequest. (name index) (name mapping-type) id))
   ([index mapping-type ^String id {:keys [parent preference
@@ -303,7 +298,6 @@
 
 (defn- convert-source-result
   "Copied from clj-elasticsearch. More performant than doing `wlk/keywordize-keys`."
-  {:doc/format :markdown}
   [src]
   (cond
    (instance? java.util.HashMap src) (into {}
@@ -315,7 +309,6 @@
 
 (defn- convert-fields-result
   "Get fields from search result, i.e. when filtering returned fields."
-  {:doc/format :markdown}
   [fields]
   (cond
    (instance? java.util.Map fields) (into {} (map (fn [^java.util.Map$Entry e]
@@ -380,7 +373,6 @@
 
 (defn ^MultiGetRequest ->multi-get-request
   "Builds a multi-get action request"
-  {:doc/format :markdown}
   ([queries]
      (->multi-get-request queries {}))
   ([queries {:keys [preference refresh realtime]}]
@@ -836,7 +828,7 @@
    :hits      (map search-hit->map (.getHits hits))})
 
 (defprotocol AggregatorPresenter
-  (^{:doc/format :markdown} aggregation-value [agg] "Presents an aggregation as immutable Clojure map"))
+  (aggregation-value [agg] "Presents an aggregation as immutable Clojure map"))
 
 (defn assoc-aggregation-value
   [acc [^String name agg]]
@@ -1136,13 +1128,11 @@
 
 (defn ^OpenIndexRequest ->open-index-request
   "opens closed index or indices for search"
-  {:doc/format :markdown}
   [index-name]
   (OpenIndexRequest. (->string-array index-name)))
 
 (defn ^CloseIndexRequest ->close-index-request
   "closes index or indices for updating"
-  {:doc/format :markdown}
   [index-name]
   (CloseIndexRequest. (->string-array index-name)))
 
