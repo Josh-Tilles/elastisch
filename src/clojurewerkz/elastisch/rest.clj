@@ -130,9 +130,9 @@
 (defn search-url
   "Constructs search query URI for the given index (or multiple indexes) and mapping types.
 
-  0-arity form constructs a URI that searches across all indexes and all mappings
-  1-arity form constructs a URI for one or more indexes and all mappings in them.
-  2-arity form constructs a URI for one or more indexes and given mappings in them.
+  * 0-arity form constructs a URI that searches across all indexes and all mappings
+  * 1-arity form constructs a URI for one or more indexes and all mappings in them.
+  * 2-arity form constructs a URI for one or more indexes and given mappings in them.
 
   Passing index name as `\"_all\"` means searching across all indexes.
 
