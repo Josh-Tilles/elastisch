@@ -268,7 +268,7 @@
 
 (defn ^Node stop-local-node
   [^Node node]
-  (.stop node)
+  (.stop node)  ; TODO use `.close` instead
   node)
 
 (defn ^Client connect-to-local-node
