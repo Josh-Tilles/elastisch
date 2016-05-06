@@ -309,7 +309,7 @@
   ([conn] (url-with-path conn "_cluster/state")))
 
 (defn cluster-nodes-stats-url
-  ([conn ^String nodes ^String attrs]
+  ([conn ^String nodes ^String attrs]  ; TODO unused param
      (url-with-path conn "_nodes" nodes "stats")))
 
 (defn cluster-nodes-info-url
