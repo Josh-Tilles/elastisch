@@ -49,14 +49,14 @@
 
   Related Elasticsearch API Reference section:
   <http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index.html>"
-  [^Connection conn ^String index-name & args]
-  (let [opts                        (ar/->opts args)
-        {:keys [settings mappings]} opts]
-    (rest/post conn (rest/index-url conn
-                                    index-name)
-               {:body (if mappings
-                        {:settings settings :mappings mappings}
-                        {:settings settings})})))
+  ([^Connection conn ^String index-name] (create conn index-name nil))
+  ([^Connection conn ^String index-name opts]
+   (let [{:keys [settings mappings]} opts]
+     (rest/post conn (rest/index-url conn
+                                     index-name)
+                {:body (if mappings
+                         {:settings settings :mappings mappings}
+                         {:settings settings})}))))
 
 (defn exists?
   "Used to check if the index (indices) exists or not.
@@ -105,8 +105,8 @@
   "The put mapping API allows to register or modify specific mapping definition for a specific type.
 
   API Reference: <http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping.html>"
-  [^Connection conn ^String index-name-or-names ^String type-name & args]
-  (let [{:keys [mapping] :as opts}  (ar/->opts args)]
+  [^Connection conn ^String index-name-or-names ^String type-name opts]
+  (let [{:keys [mapping]} opts]
     (rest/put conn
               (rest/index-mapping-url conn (join-names index-name-or-names) type-name)
               {:body mapping
@@ -203,10 +203,12 @@
   API Reference: <http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize.html>"
   ([^Connection conn]
      (rest/post conn (rest/index-optimize-url conn)))
-  ([^Connection conn index-name & args]
+  ([^Connection conn index-name]
+     (optimize conn index-name nil))
+  ([^Connection conn index-name opts]
      (rest/post conn (rest/index-optimize-url conn
                                               (join-names index-name))
-                {:body (ar/->opts args)})))
+                {:body opts})))
 
 
 (defn flush
@@ -228,9 +230,9 @@
   ([^Connection conn index-name]
      (rest/post conn (rest/index-flush-url conn
                                            (join-names index-name))))
-  ([^Connection conn index-name & args]
+  ([^Connection conn index-name opts]
      (rest/post conn (rest/index-flush-url conn
-                                           (join-names index-name)) {:body (ar/->opts args)})))
+                                           (join-names index-name)) {:body opts})))
 
 
 (defn clear-cache
@@ -251,10 +253,10 @@
   ([^Connection conn index-name]
      (rest/post conn (rest/index-clear-cache-url conn
                                                  (join-names index-name))))
-  ([^Connection conn index-name & args]
+  ([^Connection conn index-name opts]
      (rest/post conn (rest/index-clear-cache-url conn
                                                  (join-names index-name))
-                {:body (ar/->opts args)})))
+                {:body opts})))
 
 ;;
 ;; Aliases
