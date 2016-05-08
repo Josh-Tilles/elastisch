@@ -273,7 +273,7 @@
 
   and so on, the same as described in the Elasticsearch documentation guide on aliases:
   <http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html>"
-  [^Connection conn & actions]
+  [^Connection conn & actions]  ; TODO leave variadic? Or make it take a coll for consistency?
   (rest/post conn (rest/index-aliases-batch-url conn)
              {:body {:actions actions}}))
 
