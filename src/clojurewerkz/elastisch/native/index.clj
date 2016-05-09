@@ -106,7 +106,7 @@
   "The get mapping API allows to retrieve mapping definition of index or index/type.
 
   API Reference: <http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping.html>"
-  ([^Client conn ^String index-name]
+  ([^Client conn ^String index-name]  ; TODO unused `index-name`?
      (let [ft                       (es/admin-get-mappings conn (cnv/->get-mappings-request))
            ^GetMappingsResponse res (.actionGet ft)]
        (cnv/get-mappings-response->map res)))
