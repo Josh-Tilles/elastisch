@@ -20,7 +20,6 @@
             [clojure.string :as string]
             [clojure.set :refer :all]
             [clojurewerkz.elastisch.rest.utils :refer [join-names]]
-            [clojurewerkz.elastisch.arguments :as ar]
             [clojurewerkz.elastisch.rest.response :refer [not-found? hits-from]])
   (:import clojurewerkz.elastisch.rest.Connection))
 
@@ -135,23 +134,24 @@
 
   (doc/get conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\")
   ```"
-  [^Connection conn index mapping-type id & args]
-  (let [result (rest/get conn (rest/record-url conn
-                                               index mapping-type id)
-                         {:query-params (ar/->opts args)})]
-    (if (not-found? result)
-      nil
-      result)))
+  ([^Connection conn index mapping-type id] (get conn index mapping-type id nil))
+  ([^Connection conn index mapping-type id opts]
+   (let [result (rest/get conn (rest/record-url conn
+                                                index mapping-type id)
+                          {:query-params opts})]
+     (if (not-found? result)
+       nil
+       result))))
 
 (defn delete
   "Deletes document from the index."
   ([^Connection conn index mapping-type id]
      (rest/delete conn (rest/record-url conn
                                         index mapping-type id)))
-  ([^Connection conn index mapping-type id & args]
+  ([^Connection conn index mapping-type id opts]
      (rest/delete conn(rest/record-url conn
                                        index mapping-type id)
-                  {:query-params (ar/->opts args)})))
+                  {:query-params opts})))
 
 (defn present?
   "Returns true if a document with the given id is present in the provided index
