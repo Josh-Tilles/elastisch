@@ -31,16 +31,16 @@
 
 (defn register-query
   "Registers a percolator for the given index"
-  [^Client conn index query-name & args]
-  (let [opts                     (ar/->opts args)
-        ^IndexRequestBuilder irb (doto (.prepareIndex ^Client conn
-                                                      index
-                                                      PercolatorService/TYPE_NAME
-                                                      query-name)
-                                   (.setSource ^Map (wlk/stringify-keys opts)))
-        ft                       (.execute irb)
-        ^IndexResponse res       (.actionGet ft)]
-    (merge (cnv/index-response->map res) {:ok true})))
+  ([^Client conn index query-name] (register-query conn index query-name nil))
+  ([^Client conn index query-name opts]
+   (let [^IndexRequestBuilder irb (doto (.prepareIndex ^Client conn
+                                                       index
+                                                       PercolatorService/TYPE_NAME
+                                                       query-name)
+                                    (.setSource ^Map (wlk/stringify-keys opts)))
+         ft                       (.execute irb)
+         ^IndexResponse res       (.actionGet ft)]
+     (merge (cnv/index-response->map res) {:ok true}))))
 
 (defn unregister-query
   "Unregisters a percolator query for the given index"
@@ -54,12 +54,12 @@
 (defn percolate
   "Percolates a document and see which queries match on it. The document is not indexed, just
   matched against the queries you register with [[register-query]]."
-  [^Client conn index mapping-type & args]
-  (let [opts (ar/->opts args)
-        prb  (doto (.preparePercolate ^Client conn)
-               (.setIndices (cnv/->string-array index))
-               (.setDocumentType mapping-type)
-               (.setSource ^Map (wlk/stringify-keys opts)))
-        ft  (.execute prb)
-        ^PercolateResponse res (.actionGet ft)]
-    (cnv/percolate-response->map res)))
+  ([^Client conn index mapping-type] (percolate conn index mapping-type nil))
+  ([^Client conn index mapping-type opts]
+   (let [prb  (doto (.preparePercolate ^Client conn)
+                (.setIndices (cnv/->string-array index))
+                (.setDocumentType mapping-type)
+                (.setSource ^Map (wlk/stringify-keys opts)))
+         ft  (.execute prb)
+         ^PercolateResponse res (.actionGet ft)]
+     (cnv/percolate-response->map res))))
