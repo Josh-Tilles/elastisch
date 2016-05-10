@@ -32,17 +32,23 @@
 (def ^{:dynamic true} *endpoint* (Connection. (default-url) {}))
 (def ^:const throw-exceptions false)
 
+(def ^:private default-request-map
+  {:accept :json
+   :throw-exceptions? false
+   :as :json})
+
 (def ^{:const true} slash    "/")
 (def ^{:const true} encoding "UTF-8")
 
-
 (defn post-string
   [^Connection conn ^String uri {:keys [body] :as options}]
-  (json/parse-string (:body (http/post uri (merge {:accept :json}
-                                                  (.http-opts conn)
-                                                  options
-                                                  {:body body})))
-                     true))
+  (-> default-request-map
+      (merge (.http-opts conn) options)
+      (assoc :url uri
+             :method :post
+             :body body)
+      http/request
+      :body))
 
 (defn parse-safely
   [json-str]
