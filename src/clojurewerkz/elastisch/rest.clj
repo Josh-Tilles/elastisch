@@ -38,16 +38,16 @@
 
 (defn post-string
   [^Connection conn ^String uri {:keys [body] :as options}]
-  (json/decode (:body (http/post uri (merge {:accept :json}
-                                            (.http-opts conn)
-                                            options
-                                            {:body body})))
-               true))
+  (json/parse-string (:body (http/post uri (merge {:accept :json}
+                                                  (.http-opts conn)
+                                                  options
+                                                  {:body body})))
+                     true))
 
 (defn parse-safely
   [json-str]
   (try
-    (json/decode json-str true)
+    (json/parse-string json-str true)
     (catch Exception e
       (throw (ex-info "NotValidJSON"
                       {:message (str "Failed to parse " json-str)
@@ -90,12 +90,12 @@
 (defn ^:private get*
   "Like [[get]] but takes no connection"
   ([^String uri]
-   (json/decode (:body (http/get uri {:accept :json :throw-exceptions throw-exceptions}))
-                true))
+   (json/parse-string (:body (http/get uri {:accept :json :throw-exceptions throw-exceptions}))
+                      true))
   ([^String uri options]
-   (json/decode (:body (http/get uri (merge {:accept :json :throw-exceptions throw-exceptions}
-                                            options)))
-                true)))
+   (json/parse-string (:body (http/get uri (merge {:accept :json :throw-exceptions throw-exceptions}
+                                                  options)))
+                      true)))
 
 (defn head
   [^Connection conn ^String uri]

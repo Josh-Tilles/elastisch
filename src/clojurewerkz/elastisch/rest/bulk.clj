@@ -25,7 +25,7 @@
 (defn ^:private bulk-with-url
   [conn url operations & args]
   (let [opts      (ar/->opts args)
-        bulk-json (map json/encode operations)
+        bulk-json (map json/generate-string operations)
         bulk-json (-> bulk-json
                       (interleave (repeat "\n"))
                       (string/join))]

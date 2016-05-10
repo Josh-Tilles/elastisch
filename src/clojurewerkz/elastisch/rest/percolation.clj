@@ -42,7 +42,7 @@
   ;; rest/get won't serialize the body for us. MK.
   (rest/get conn (rest/index-percolation-url conn
                                              index percolator)
-            {:body (json/encode (ar/->opts args))}))
+            {:body (json/generate-string (ar/->opts args))}))
 
 (defn percolate-existing
   "Percolates an existing document and sees which queries match on it."

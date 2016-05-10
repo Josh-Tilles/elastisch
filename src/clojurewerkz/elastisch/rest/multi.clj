@@ -22,7 +22,7 @@
 (defn ^:private msearch-with-url
   [conn url queries args]
   (let [opts (ar/->opts args)
-        body (string/join "\n" (doall (map json/encode queries)))]
+        body (string/join "\n" (doall (map json/generate-string queries)))]
     (rest/get conn url
               ;; multi-search is sensitive to trailing new line. MK.
               {:body (str body "\n")
