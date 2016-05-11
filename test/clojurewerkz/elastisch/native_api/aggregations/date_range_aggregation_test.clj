@@ -18,7 +18,6 @@
 
 (use-fixtures :each fx/reset-indexes fx/prepopulate-people-index)
 
-;; TODO: this errors against ES 2.2.x
 (let [conn (th/connect-native-client)]
   (deftest ^{:native true :aggregation true} test-date-range-aggregation
     (let [index-name   "people"
