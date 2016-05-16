@@ -131,7 +131,7 @@
                                               {:query   (q/match-all)
                                                :sort    (q/sort "surname"
                                                                 {:order "asc"
-                                                                 :ignore-unmapped true})}))]
+                                                                 :ignore-unmapped true})}))]  ; TODO is `:ignore_unmapped` buggily nested?
       (is (= 4 (count hits)))))
 
   (deftest ^{:native true} search-using-template-with-results
