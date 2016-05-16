@@ -138,8 +138,8 @@
   (doc/create-search-template conn "test-template1" fx/test-template1)
   (doc/create conn "tweets" "tweet" fx/tweet1)
     (let [result (map :source (hits-from (doc/search conn "tweets" "tweet"
-                             :template {:id "test-template1"}
-                             :params {:username "clojurewerkz"})))]
+                             {:template {:id "test-template1"}
+                              :params {:username "clojurewerkz"}})))]
   (is (= 1 (count result)))))
 
 
@@ -148,6 +148,6 @@
   (doc/create-search-template conn "test-template1" fx/test-template1)
   (doc/create conn "tweets" "tweet" fx/tweet1)
     (let [result (map :source (hits-from (doc/search conn "tweets" "tweet"
-                             :template {:id "test-template1"}
-                             :params {:username "returns nothing"})))]
+                             {:template {:id "test-template1"}
+                              :params {:username "returns nothing"}})))]
   (is (empty?  result)))))
