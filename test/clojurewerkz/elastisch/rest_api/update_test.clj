@@ -25,17 +25,17 @@
           mapping-type "person"
           id           "3"
           new-bio      "Such a brilliant person"]
-      (idx/create conn index-name :mappings fx/people-mapping)
+      (idx/create conn index-name {:mappings fx/people-mapping})
       (doc/put conn index-name mapping-type "1" fx/person-jack)
       (doc/put conn index-name mapping-type "2" fx/person-mary)
       (doc/put conn index-name mapping-type "3" fx/person-joe)
       (idx/refresh conn index-name)
-      (is (any-hits? (doc/search conn index-name mapping-type :query (q/term :biography "nice"))))
-      (is (no-hits? (doc/search conn index-name mapping-type :query (q/term :biography "brilliant"))))
+      (is (any-hits? (doc/search conn index-name mapping-type {:query (q/term :biography "nice")})))
+      (is (no-hits? (doc/search conn index-name mapping-type {:query (q/term :biography "brilliant")})))
       (doc/replace conn index-name mapping-type id (assoc fx/person-joe :biography new-bio))
       (idx/refresh conn index-name)
-      (is (any-hits? (doc/search conn index-name mapping-type :query (q/term :biography "brilliant"))))
-      (is (no-hits? (doc/search conn index-name mapping-type :query (q/term :biography "nice"))))))
+      (is (any-hits? (doc/search conn index-name mapping-type {:query (q/term :biography "brilliant")})))
+      (is (no-hits? (doc/search conn index-name mapping-type {:query (q/term :biography "nice")})))))
 
   (deftest ^{:rest true} test-versioning
     (let [index-name "people"
