@@ -35,8 +35,7 @@
       (doc/replace conn index-name mapping-type id (assoc fx/person-joe :biography new-bio))
       (idx/refresh conn index-name)
       (is (any-hits? (doc/search conn index-name mapping-type {:query (q/term :biography "brilliant")})))
-      ;; TODO: investigate this. MK.
-      #_ (is (no-hits? (doc/search conn index-name mapping-type :query (q/term :biography "nice"))))))
+      (is (no-hits? (doc/search conn index-name mapping-type :query (q/term :biography "nice"))))))
 
   (deftest ^{:rest true} test-versioning
     (let [index-name "people"
