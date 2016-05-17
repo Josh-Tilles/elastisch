@@ -24,7 +24,7 @@
   (deftest ^{:native true} test-highlighting-with-all-defaults
     (let [index "articles"
           type  "article"]
-      (idx/create conn index :mappings fx/articles-mapping)
+      (idx/create conn index {:mappings fx/articles-mapping})
       (doc/put conn index type "1" fx/article-on-elasticsearch)
       (doc/put conn index type "2" fx/article-on-lucene)
       (doc/put conn index type "3" fx/article-on-nueva-york)
