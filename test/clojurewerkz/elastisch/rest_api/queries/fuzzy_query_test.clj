@@ -41,7 +41,7 @@
   (deftest ^{:rest true :query true} test-basic-fuzzy-query-with-date-fields
     (let [index-name   "articles"
           mapping-type "article"
-          response     (doc/search conn index-name mapping-type :query (q/fuzzy "last-edit.date" {:value "2012-03-25T12:00:00" :fuzziness "1d"}))
+          response     (doc/search conn index-name mapping-type :query (q/fuzzy :latest-edit {:value "2012-03-25T12:00:00" :fuzziness "1d"}))
           hits         (hits-from response)]
       (is (any-hits? response))
       (is (= 1 (total-hits response)))
