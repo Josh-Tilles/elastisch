@@ -42,8 +42,8 @@
     (let [index-name   "people"
           mapping-type "person"
           hits         (hits-from (doc/search conn index-name mapping-type
-                                              :query  (q/match-all)
-                                              :filter {:term {:username "esmary"}}))]
+                                              :query       (q/match-all)
+                                              :post_filter {:term {:username "esmary"}}))]
       (is (= 1 (count hits)))))
 
   (deftest ^{:native true} test-basic-sorting-over-string-field-with-implicit-order
