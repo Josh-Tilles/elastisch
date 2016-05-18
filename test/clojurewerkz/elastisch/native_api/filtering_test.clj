@@ -25,7 +25,7 @@
           mapping-type "person"
           hits         (hits-from (doc/search conn index-name mapping-type
                                               :query       (q/match-all)
-                                              :post_filter {:term {:username "esmary"}}))]
+                                              :post-filter {:term {:username "esmary"}}))]
       (is (= 1 (count hits)))
       (is (= "Lindey" (-> hits first :_source :last-name)))))
 
@@ -34,6 +34,6 @@
           mapping-type "person"
           hits         (hits-from (doc/search conn index-name mapping-type
                                               :query       (q/match-all)
-                                              :post_filter {:range {:age {:from 26 :to 30}}}))]
+                                              :post-filter {:range {:age {:from 26 :to 30}}}))]
       (is (= 2 (count hits)))
       (is (#{28 29} (-> hits first :_source :age))))))
