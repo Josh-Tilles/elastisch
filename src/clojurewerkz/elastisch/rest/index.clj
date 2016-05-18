@@ -104,7 +104,7 @@
   "The put mapping API allows to register or modify specific mapping definition for a specific type.
 
   API Reference: <http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping.html>"
-  ([^Connection conn ^String index-name-or-names ^String type-name] (update-mapping conn index-name-or-names type-name nil))
+  ([^Connection conn ^String index-name-or-names ^String type-name] (update-mapping conn index-name-or-names type-name nil))  ; TODO needless arity?
   ([^Connection conn ^String index-name-or-names ^String type-name opts]
    (let [{:keys [mapping]}  opts]
      (rest/put conn
