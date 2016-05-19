@@ -44,7 +44,7 @@
       (is (= #{"1" "2"} ids))))
 
   (deftest ^{:query true :native true} test-range-query-over-date-time-field-with-from-and-to
-     (let [response (doc/search conn index-name mapping-type {:query (q/range :timestamp :from "20120801T160000+0100" :to "20120801T180000+0100"}))
+     (let [response (doc/search conn index-name mapping-type {:query (q/range :timestamp :from "20120801T160000+0100" :to "20120801T180000+0100")})
            ids      (ids-from response)]
        (is (= 1 (total-hits response)))
        (is (= #{"2"} ids))))))
