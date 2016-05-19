@@ -89,7 +89,7 @@
                                                    {:query (q/match-all)
                                                     :search_type "query_then_fetch"
                                                     :scroll "1m"
-                                                    :size 2)})]
+                                                    :size 2}))]
       (is (not (realized? res-seq)))
       (is (= 4 (count res-seq)))
       (is (= 4 (count (distinct res-seq))))
