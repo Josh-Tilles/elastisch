@@ -34,7 +34,7 @@
       (is (= 4 (total-hits result)))))
 
   (deftest ^{:rest true :query true} test-basic-term-query-with-tweets-mapping
-    (let [result (doc/search conn "tweets" "tweet" {:query (q/term :text "improved"))}]
+    (let [result (doc/search conn "tweets" "tweet" {:query (q/term :text "improved")})]
       (is (any-hits? result))
       (is (= fx/tweet1 (-> result hits-from first :_source)))))
 
