@@ -43,7 +43,7 @@
           id         "1"]
       (idx/create conn index-name {:mappings fx/people-mapping})
 
-      (doc/create conn index-name index-type (assoc fx/person-jack :biography "brilliant1") :id id)
+      (doc/create conn index-name index-type (assoc fx/person-jack :biography "brilliant1") {:id id})
       (idx/refresh conn index-name)
 
       (let [original-document (doc/get conn index-name index-type id)
@@ -103,7 +103,7 @@
           id         "1"]
       (idx/create conn index-name {:mappings fx/people-mapping})
 
-      (doc/create conn index-name index-type (assoc fx/person-jack :biography "brilliant1") :id id)
+      (doc/create conn index-name index-type (assoc fx/person-jack :biography "brilliant1") {:id id})
       (idx/refresh conn index-name)
 
       (let [original-document (doc/get conn index-name index-type id)]
