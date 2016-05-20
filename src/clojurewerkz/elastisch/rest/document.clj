@@ -54,12 +54,13 @@
 
   (doc/create conn \"people\" \"person\" {:first-name \"John\" :last-name \"Appleseed\" :age 28})
 
-  (doc/create conn \"people\" \"person\" {:first-name \"John\" :last-name \"Appleseed\" :age 28} :id \"1825c5432775b8d1a477acfae57e91ac8c767aed\")
+  (doc/create conn \"people\" \"person\" {:first-name \"John\" :last-name \"Appleseed\" :age 28} {:id \"1825c5432775b8d1a477acfae57e91ac8c767aed\"})
   ```"
-  ([^Connection conn index mapping-type document & args]
+  ([^Connection conn index mapping-type document] (create conn index mapping-type document nil))
+  ([^Connection conn index mapping-type document opts]
      (rest/post conn (rest/mapping-type-url conn
                                             index mapping-type)
-                {:body document :query-params (ar/->opts args)})))
+                {:body document :query-params opts})))
 
 (defn put
   "Creates or updates a document in the search index, using the provided document id"
@@ -67,10 +68,10 @@
      (rest/put conn (rest/record-url conn
                                      index mapping-type id)
                {:body document}))
-  ([^Connection conn index mapping-type id document & args]
+  ([^Connection conn index mapping-type id document opts]
      (rest/put conn (rest/record-url conn
                                      index mapping-type id)
-               {:body document :query-params (ar/->opts args)})))
+               {:body document :query-params opts})))
 
 (defn upsert
   "Updates an existing document in the search index with given partial document,
@@ -79,22 +80,22 @@
     (rest/post conn (rest/record-update-url conn
                                             index mapping-type id) {:body {:doc partial-doc
                                                                            :doc_as_upsert true}}))
-  ([^Connection conn index mapping-type id partial-doc & args]
+  ([^Connection conn index mapping-type id partial-doc opts]
     (rest/post conn (rest/record-update-url conn
                                             index mapping-type id)
                {:body {:doc partial-doc
                        :doc_as_upsert true}
-                :query-params (ar/->opts args)})))
+                :query-params opts})))
 
 (defn update-with-partial-doc
   "Updates an existing document in the search index with given partial document"
   ([^Connection conn index mapping-type id partial-doc]
      (rest/post conn (rest/record-update-url conn
                                              index mapping-type id) {:body {:doc partial-doc}}))
-  ([^Connection conn index mapping-type id partial-doc & args]
+  ([^Connection conn index mapping-type id partial-doc opts]
      (rest/post conn (rest/record-update-url conn
                                              index mapping-type id)
-                {:body {:doc partial-doc} :query-params (ar/->opts args)})))
+                {:body {:doc partial-doc} :query-params opts})))
 
 (defn update-with-script
   "Updates a document using a script.
@@ -105,7 +106,7 @@
   (require '[clojurewerkz.elastisch.rest.document :as doc])
 
   (doc/update-with-script conn \"people\" \"person\" \"1825c5432775b8d1a477acfae57e91ac8c767aed\"
-                               \"ctx._source.age = ctx._source.age += 1\" {} :lang \"groovy\")
+                               \"ctx._source.age = ctx._source.age += 1\" {} {:lang \"groovy\"})
   ```"
   ([^Connection conn index mapping-type id script]
      (rest/post conn (rest/record-update-url conn
@@ -115,11 +116,11 @@
      (rest/post conn (rest/record-update-url conn
                                              index mapping-type id)
                 {:body {:script script :params params}}))
-  ([^Connection conn index mapping-type id script params & args]
+  ([^Connection conn index mapping-type id script params opts]
      (rest/post conn (rest/record-update-url conn
                                              index mapping-type id)
-                (let [optional-params (ar/->opts args)]
-                  {:body (merge {:script script :params params} optional-params)}))))
+                {:body (merge {:script script :params params}
+                              opts)})))
 
 
 (defn get
