@@ -116,11 +116,10 @@
 
 (defn update-mapping
   "The put mapping API allows to register or modify specific mapping definition for a specific type."
-  ([^Client conn ^String index-name ^String mapping-type] (update-mapping conn index-name mapping-type nil))
-  ([^Client conn ^String index-name ^String mapping-type opts]
-   (let [ft                      (es/admin-put-mapping conn (cnv/->put-mapping-request index-name mapping-type opts))
-         ^PutMappingResponse res (.actionGet ft)]
-     {:ok (.isAcknowledged res) :acknowledged (.isAcknowledged res)})))
+  [^Client conn ^String index-name ^String mapping-type opts]
+  (let [ft                      (es/admin-put-mapping conn (cnv/->put-mapping-request index-name mapping-type opts))
+        ^PutMappingResponse res (.actionGet ft)]
+    {:ok (.isAcknowledged res) :acknowledged (.isAcknowledged res)}))
 
 (defn update-settings
   "Updates index settings. No argument version updates index settings globally"
