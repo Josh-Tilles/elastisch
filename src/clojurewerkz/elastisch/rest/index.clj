@@ -104,11 +104,12 @@
   "The put mapping API allows to register or modify specific mapping definition for a specific type.
 
   API Reference: <http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping.html>"
-  [^Connection conn ^String index-name-or-names ^String type-name {:keys [mapping], :as opts}]
-  (rest/put conn
-            (rest/index-mapping-url conn (join-names index-name-or-names) type-name)
-            {:body mapping
-             :query-params (dissoc opts :mapping)}))
+  [^Connection conn ^String index-name-or-names ^String type-name opts]
+  (let [{:keys [mapping]} opts]
+    (rest/put conn
+              (rest/index-mapping-url conn (join-names index-name-or-names) type-name)
+              {:body mapping
+               :query-params (dissoc opts :mapping)})))
 
 ;;
 ;; Settings
