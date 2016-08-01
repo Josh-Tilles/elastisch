@@ -159,14 +159,16 @@
     {:ok (.isAcknowledged res) :acknowledged (.isAcknowledged res)}))
 
 (defn close
-  "Closes an index or indices
+  "Closes an index or indices.
 
   Usage:
 
   ```clojure
   (idx/close conn \"my-index\")
   (idx/close conn [\"my-index\" \"dein-index\"])
-  ```"
+  ```
+
+  API Reference: <http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html>"
   [^Client conn index-name]
   (let [ft (es/admin-close-index conn (cnv/->close-index-request index-name))
         ^CloseIndexResponse res (.actionGet ft)]
