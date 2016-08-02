@@ -259,7 +259,7 @@
 (defn stats
   "Returns statistics about indexes.
 
-  No argument version returns all stats.
+  Single argument version returns all stats.
   Options may be used to define what exactly will be contained in the response:
 
   * `:docs`: the number of documents, deleted documents
