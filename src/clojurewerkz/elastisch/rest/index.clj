@@ -399,6 +399,7 @@
   Accepted options define what exactly will be contained in the response:
 
   * `:stats`: the specific stat(s) to return (defaults to all)
+
   * `:types`: combined with index stats to provide document type level stats
   * `:groups`: search statistics can be associated with one or more groups
   * `:fields`: fields to be included in the statistics by default where applicable
