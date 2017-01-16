@@ -394,19 +394,72 @@
 
 
 (defn stats
-  "Returns statistics about an index or multiple indexes
+  "Provides statistics on operations happening on indices.
 
-  Accepted options define what exactly will be contained in the response:
+  By default, all stats are returned, but specific subsets
+  can be requested using the `:stats` key in the options-map.
 
-  * `:stats`: the specific stat(s) to return (defaults to all)
+  Some statistics allow per field granularity; by default, all fields
+  are included, but specific fields can be requested instead
+  with the `:fields`, `:completion_fields`, and `:fielddata_fields`
+  keys in the options-map.
 
-  * `:types`: combined with index stats to provide document type level stats
-  * `:groups`: search statistics can be associated with one or more groups
-  * `:fields`: fields to be included in the statistics by default where applicable
-  * `:completion_fields`: fields to be included in the completion suggest statistics
-  * `:fielddata_fields`: fields to be included in the fielddata statistics
+  Accepted options:
 
-  API Reference: <https://www.elastic.co/guide/en/elasticsearch/reference/1.5/indices-stats.html>"
+  * `:stats` (collection of strings): specify a subset of stats
+      to return. By default, all stats are returned.
+
+      Specific stats that can be requested are:
+
+      * `\"docs\"`: The number of docs / deleted docs (docs not yet
+        merged out). Note, affected by refreshing the index.
+      * `\"store\"`: The size of the index.
+      * `\"indexing\"`: Indexing statistics, can be combined
+        with a comma separated list of `types` to provide
+        document type level stats.
+      * `\"get\"`: Get statistics, including missing stats.
+      * `\"search\"`: Search statistics. You can include
+        statistics for custom groups by adding an extra `:groups`
+        parameter (search operations can be associated with one or more
+        groups).
+      * `\"completion\"`: Completion suggest statistics.
+      * `\"fielddata\"`: Fielddata statistics.
+      * `\"flush\"`: Flush statistics.
+      * `\"merge\"`: Shard request cache statistics.
+      * `\"request_cache\"`: Refresh statistics.
+      * `\"refresh\"`: Suggest statistics.
+      * `\"suggest\"`: Suggest statistics.
+      * `\"warmer\"`: Warmer statistics.
+      * `\"translog\"`: Translog statistics.
+  * `:fields` (collection of strings): Fields to be included
+      in the statistics. This is used as the default list unless
+      a more specific field list is provided (see below).
+  * `:completion_fields` (collection of strings):
+      Fields to be included in the Completion Suggest statistics.
+  * `:fielddata_fields` (collection of strings):
+      Fields to be included in the Fielddata statistics.
+  * `:types` (collection of strings): Document types for the `indexing`
+      index metric.
+  * `:groups` (collection of strings): Include statistics for custom
+      groups. Use `\"_all\"` to return statistics for all groups.
+  * `:level` (string/enum, default: `\"indices\"`):
+
+      **Must be one of: `\"cluster\"`, `\"indices\"`, or `\"shards\"`.**
+
+      The stats returned are aggregated on the index level,
+      with `:primaries` and `:total` aggregations, where `:primaries`
+      are the values for only the primary shards, and `:total`
+      are the cumulated values for both primary and replica shards.
+
+      In order to get back shard level stats, set the `:level`
+      parameter to `\"shards\"`.
+
+      Note, as shards move around the cluster, their stats
+      will be cleared as they are created on other nodes.
+      On the other hand, even though a shard “left” a node, that node
+      will still retain the stats that shard contributed to.
+
+  API Reference: <https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-stats.html>"
   ([^Connection conn index-name]
    (stats conn index-name nil))
   ([^Connection conn index-name opts]
