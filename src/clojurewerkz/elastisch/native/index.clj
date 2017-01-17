@@ -280,7 +280,12 @@
        (cnv/indices-stats-response->map res))))
 
 (defn segments
-  "Returns segments information for one or more indices."
+  "Provides low-level segments information that a Lucene index (shard level)
+  is built with. Allows access to more information on the state of a shard
+  and an index, possibly optimization information, data “wasted” on deletes,
+  and so on.
+
+  API Reference: <https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-segments.html>"
   [^Client conn index-name]
   (let [ft                           (es/admin-index-segments conn (cnv/->indices-segments-request index-name))
         ^IndicesSegmentResponse res (.actionGet ft)]
