@@ -171,14 +171,6 @@
   (rest/post conn (rest/index-close-url conn
                                         (join-names index-name))))
 
-(defn snapshot
-  "Takes a snapshot of an index or multiple indexes.
-
-  API Reference: <http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot.html>"
-  [^Connection conn index-name]
-  (rest/post conn (rest/index-snapshot-url conn
-                                           index-name)))
-
 (defn refresh
   "Refreshes an index or multiple indices manually.
 
