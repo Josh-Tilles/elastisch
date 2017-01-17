@@ -383,9 +383,12 @@
                                           (join-names index-name))))
 
 (defn segments
-  "Returns segments information for an index or multiple indexes.
+  "Provides low-level segments information that a Lucene index (shard level)
+  is built with. Allows access to more information on the state of a shard
+  and an index, possibly optimization information, data “wasted” on deletes,
+  and so on.
 
-  API Reference: <http://www.elasticsearch.org/guide/reference/api/admin-indices-segments.html>"
+  API Reference: <https://www.elastic.co/guide/en/elasticsearch/reference/2.3/indices-segments.html>"
   ([^Connection conn]
      (rest/get conn (rest/index-segments-url conn)))
   ([^Connection conn index-name]
